@@ -1,0 +1,13 @@
+{% extends "base_auth.html" %}
+{% set active_page='courses' %}
+{% block content %}
+{% include "partials/user_shell.html" %}
+{% block desktop_content %}
+<div class="dw-page-head"><div><h1>{{ lesson.title }}</h1><p>{{ lesson.chapter.course.title }} · {{ lesson.chapter.title }} · {{ lesson.chapter.course.language.name }}</p></div><a class="dw-btn dw-btn-outline" href="{{ url_for('learning.course_detail',course_id=lesson.chapter.course_id) }}">Course</a></div>
+<div class="dw-panel mb-4"><div class="dw-panel-head"><span class="dw-panel-title">Lesson</span></div><div class="dw-panel-body"><div style="color:#cbd5e1;font-size:.72rem;line-height:1.8;white-space:pre-wrap">{{ lesson.content or 'No lesson explanation available.' }}</div>{% if lesson.expected_output %}<div class="mt-4"><div class="dw-label">Expected Output</div><pre style="white-space:pre-wrap;background:#080b12;border:1px solid var(--dw-border);padding:13px;border-radius:9px;color:#86efac;font-size:.64rem">{{ lesson.expected_output }}</pre></div>{% endif %}</div></div>
+<div class="dw-grid-2">
+<section class="dw-panel"><div class="dw-panel-head"><span class="dw-panel-title">Code Examples</span></div><div class="dw-panel-body">{% for example in lesson.examples %}<div class="dw-card mb-3"><h3>{{ example.title }}</h3>{% if example.explanation %}<p>{{ example.explanation }}</p>{% endif %}<pre style="white-space:pre-wrap;background:#080b12;border:1px solid rgba(255,255,255,.05);padding:13px;border-radius:9px;color:#cbd5e1;font-size:.62rem;line-height:1.7;margin-top:10px">{{ example.code }}</pre></div>{% else %}<div class="dw-empty">No examples available.</div>{% endfor %}</div></section>
+<section class="dw-panel"><div class="dw-panel-head"><span class="dw-panel-title">Practice Exercises</span></div><div class="dw-panel-body">{% for exercise in lesson.exercises %}<div class="dw-card mb-3"><h3>{{ exercise.title }}</h3><p>{{ exercise.instructions }}</p>{% if exercise.starter_code %}<pre style="white-space:pre-wrap;background:#080b12;border:1px solid rgba(255,255,255,.05);padding:13px;border-radius:9px;color:#cbd5e1;font-size:.62rem;line-height:1.7;margin-top:10px">{{ exercise.starter_code }}</pre>{% endif %}<div class="mt-2" style="color:#64748b;font-size:.58rem">Solve this exercise in the DevWorkspace editor.</div></div>{% else %}<div class="dw-empty">No exercises available.</div>{% endfor %}</div></section>
+</div>
+{% endblock %}
+{% endblock %}

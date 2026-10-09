@@ -1,0 +1,171 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+    <main style="padding-top: calc(var(--navbar-height) + 2rem);">
+    <!-- Header -->
+    <section class="py-5 text-center bg-surface-secondary border-bottom">
+      <div class="container">
+        <span class="section-tag">Complete Feature Set</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">Built for Modern Learning &amp; Rapid Building</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 720px;">
+          Discover the complete suite of tools designed to help students, self-learners, and educators master programming and manage technical workflows effortlessly.
+        </p>
+      </div>
+    </section>
+
+    <!-- 16 Feature Showcase Grid -->
+    <section class="public-section">
+      <div class="container">
+        <div class="row g-4">
+          <!-- 1. Programming Learning -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-blue"><i class="fa-solid fa-book-open-reader"></i></div>
+              <h3 class="h5 fw-bold text-dark">Programming Learning</h3>
+              <p class="text-secondary mb-0">Structured pedagogical tracks spanning fundamentals, object-oriented concepts, and advanced application development.</p>
+            </div>
+          </div>
+
+          <!-- 2. Languages -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-purple"><i class="fa-solid fa-language"></i></div>
+              <h3 class="h5 fw-bold text-dark">Multi-Language Tracks</h3>
+              <p class="text-secondary mb-0">Support for Python, HTML5, CSS3, and JavaScript, with C++, Java, and SQL expansion packs on the roadmap.</p>
+            </div>
+          </div>
+
+          <!-- 3. Courses -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-green"><i class="fa-solid fa-chalkboard"></i></div>
+              <h3 class="h5 fw-bold text-dark">Categorized Courses</h3>
+              <p class="text-secondary mb-0">Beginner, intermediate, and specialized masterclasses structured by duration, difficulty, and hands-on deliverables.</p>
+            </div>
+          </div>
+
+          <!-- 4. Lessons -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-orange"><i class="fa-solid fa-list-check"></i></div>
+              <h3 class="h5 fw-bold text-dark">Granular Lessons</h3>
+              <p class="text-secondary mb-0">Bite-sized modules featuring syntax reference cards, editable code samples, expected outputs, and key takeaways.</p>
+            </div>
+          </div>
+
+          <!-- 5. Exercises -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-cyan"><i class="fa-solid fa-terminal"></i></div>
+              <h3 class="h5 fw-bold text-dark">Practice Exercises</h3>
+              <p class="text-secondary mb-0">Hands-on coding challenges with input/output validation, hints, and automated correctness scoring.</p>
+            </div>
+          </div>
+
+          <!-- 6. Quizzes -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-red"><i class="fa-solid fa-circle-question"></i></div>
+              <h3 class="h5 fw-bold text-dark">Interactive Quizzes</h3>
+              <p class="text-secondary mb-0">Multiple-choice assessments with immediate feedback, detailed explanations, and review logs.</p>
+            </div>
+          </div>
+
+          <!-- 7. Progress Tracking -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-blue"><i class="fa-solid fa-chart-pie"></i></div>
+              <h3 class="h5 fw-bold text-dark">Progress &amp; Streaks</h3>
+              <p class="text-secondary mb-0">Visual analytics, completion rings, streak metrics, and downloadable milestone certificates.</p>
+            </div>
+          </div>
+
+          <!-- 8. Code Workspace -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-purple"><i class="fa-solid fa-code"></i></div>
+              <h3 class="h5 fw-bold text-dark">Web Code Workspace</h3>
+              <p class="text-secondary mb-0">Monaco-style browser IDE equipped with multi-file tabs, file tree navigation, and simulated execution logs.</p>
+            </div>
+          </div>
+
+          <!-- 9. Projects -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-green"><i class="fa-solid fa-diagram-project"></i></div>
+              <h3 class="h5 fw-bold text-dark">Project Hub</h3>
+              <p class="text-secondary mb-0">Multi-step project generator wizard, folder scaffolds, tags, and project duplicate/archive tools.</p>
+            </div>
+          </div>
+
+          <!-- 10. File Management -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-orange"><i class="fa-solid fa-folder-tree"></i></div>
+              <h3 class="h5 fw-bold text-dark">Smart File Manager</h3>
+              <p class="text-secondary mb-0">Manage docs, code, images, and archives with grid/list toggles, drag-and-drop simulated upload, and previews.</p>
+            </div>
+          </div>
+
+          <!-- 11. Notes -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-cyan"><i class="fa-solid fa-note-sticky"></i></div>
+              <h3 class="h5 fw-bold text-dark">Developer Notes</h3>
+              <p class="text-secondary mb-0">Quick capture notes with markdown support, pin-to-top, color tags, and persistent localStorage sync.</p>
+            </div>
+          </div>
+
+          <!-- 12. Backup -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-red"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <h3 class="h5 fw-bold text-dark">Snapshot Backup</h3>
+              <p class="text-secondary mb-0">Package entire workspaces or selected projects into timestamped zip snapshots with estimated size calculators.</p>
+            </div>
+          </div>
+
+          <!-- 13. Restore -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-blue"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              <h3 class="h5 fw-bold text-dark">Conflict-Safe Restore</h3>
+              <p class="text-secondary mb-0">Preview archive contents and resolve naming collisions with Skip, Replace, or Rename policies.</p>
+            </div>
+          </div>
+
+          <!-- 14. Dashboard Customization -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-purple"><i class="fa-solid fa-palette"></i></div>
+              <h3 class="h5 fw-bold text-dark">Theme &amp; Accent Switcher</h3>
+              <p class="text-secondary mb-0">Light, Dark, and System modes with 5 vibrant accent palettes (Blue, Purple, Green, Orange, Red).</p>
+            </div>
+          </div>
+
+          <!-- 15. User Settings -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-green"><i class="fa-solid fa-sliders"></i></div>
+              <h3 class="h5 fw-bold text-dark">User Preferences</h3>
+              <p class="text-secondary mb-0">Fine-tune editor font sizing, tab spacing, layout density, notification toggles, and security settings.</p>
+            </div>
+          </div>
+
+          <!-- 16. Admin Management -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper feature-icon-red"><i class="fa-solid fa-user-shield"></i></div>
+              <h3 class="h5 fw-bold text-dark">Admin Management Portal</h3>
+              <p class="text-secondary mb-0">Independent administrator dashboard to curate curriculum, audit user activities, and manage platform reports.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <a href="../auth/register.html" class="btn-app-primary btn-app-lg">Experience All Features Now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock  %}

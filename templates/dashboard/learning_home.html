@@ -1,0 +1,12 @@
+{% extends "base_auth.html" %}
+{% set active_page='courses' %}
+{% block content %}
+{% include "partials/user_shell.html" %}
+{% block desktop_content %}
+<div class="dw-page-head"><div><h1>Learning Center</h1><p>Published content from the DevWorkspace administrator.</p></div></div>
+<div class="dw-grid-2">
+<div class="dw-panel"><div class="dw-panel-head"><span class="dw-panel-title">Languages</span><span class="dw-badge">{{ languages|length }}</span></div><div class="dw-panel-body">{% for language in languages %}<a href="{{ url_for('learning.language_detail',slug=language.slug) }}" class="dw-list-item"><div class="dw-list-icon"><i class="{{ language.icon }}"></i></div><div class="dw-list-main"><div class="dw-list-title">{{ language.name }}</div><div class="dw-list-meta">{{ language.courses|length }} course(s) · {{ language.version }}</div></div><i class="fa-solid fa-chevron-right" style="color:#475569;font-size:.6rem"></i></a>{% else %}<div class="dw-empty">No languages published yet.</div>{% endfor %}</div></div>
+<div class="dw-panel"><div class="dw-panel-head"><span class="dw-panel-title">Courses</span><span class="dw-badge">{{ courses|length }}</span></div><div class="dw-panel-body">{% for course in courses %}<a href="{{ url_for('learning.course_detail',course_id=course.id) }}" class="dw-list-item"><div class="dw-list-icon"><i class="fa-solid fa-book-open"></i></div><div class="dw-list-main"><div class="dw-list-title">{{ course.title }}</div><div class="dw-list-meta">{{ course.language.name }} · {{ course.level|title }}</div></div><i class="fa-solid fa-chevron-right" style="color:#475569;font-size:.6rem"></i></a>{% else %}<div class="dw-empty">No courses published yet.</div>{% endfor %}</div></div>
+</div>
+{% endblock %}
+{% endblock %}

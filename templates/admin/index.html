@@ -1,0 +1,473 @@
+<!-- templates/admin/index.html -->
+
+{% extends "base_auth.html" %}
+
+{% block content %}
+
+<style>
+    :root {
+        --admin-bg: #f6f8fc;
+        --admin-card: #ffffff;
+        --admin-border: #e8ecf3;
+        --admin-text: #172033;
+        --admin-muted: #7b8498;
+        --admin-primary: #6366f1;
+    }
+
+    body {
+        background: var(--admin-bg) !important;
+        color: var(--admin-text);
+    }
+
+    .admin-layout {
+        min-height: 100vh;
+        display: flex;
+    }
+
+    .admin-sidebar {
+        width: 250px;
+        background: #111827;
+        color: white;
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 1000;
+        padding: 22px 15px;
+        overflow-y: auto;
+    }
+
+    .admin-brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 8px 12px 25px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .admin-brand-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    }
+
+    .admin-nav-title {
+        color: #6b7280;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        padding: 15px 12px 8px;
+    }
+
+    .admin-nav a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #9ca3af;
+        text-decoration: none;
+        padding: 11px 12px;
+        border-radius: 9px;
+        margin-bottom: 4px;
+        transition: .2s;
+    }
+
+    .admin-nav a:hover,
+    .admin-nav a.active {
+        color: white;
+        background: rgba(255,255,255,.08);
+    }
+
+    .admin-nav a.active {
+        background: linear-gradient(
+            135deg,
+            rgba(99,102,241,.9),
+            rgba(139,92,246,.9)
+        );
+    }
+
+    .admin-main {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        padding: 28px;
+    }
+
+    .admin-topbar {
+        background: white;
+        border: 1px solid var(--admin-border);
+        border-radius: 16px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    .admin-stat {
+        background: white;
+        border: 1px solid var(--admin-border);
+        border-radius: 18px;
+        padding: 22px;
+        height: 100%;
+    }
+
+    .admin-stat-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #eef2ff;
+        color: var(--admin-primary);
+        font-size: 19px;
+        margin-bottom: 18px;
+    }
+
+    .admin-stat h2 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .admin-stat p {
+        color: var(--admin-muted);
+        margin: 5px 0 0;
+    }
+
+    .admin-panel {
+        background: white;
+        border: 1px solid var(--admin-border);
+        border-radius: 18px;
+        padding: 22px;
+        height: 100%;
+    }
+
+    .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .admin-table th {
+        color: var(--admin-muted);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--admin-border);
+    }
+
+    .admin-table td {
+        padding: 14px 12px;
+        border-bottom: 1px solid #f0f2f6;
+    }
+
+    .admin-user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .admin-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #eef2ff;
+        color: #4f46e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    .admin-btn {
+        border: 0;
+        border-radius: 9px;
+        padding: 9px 14px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .admin-btn-primary {
+        background: #6366f1;
+        color: white;
+    }
+
+    .admin-btn-primary:hover {
+        color: white;
+        background: #4f46e5;
+    }
+
+    @media (max-width: 900px) {
+        .admin-sidebar {
+            width: 75px;
+        }
+
+        .admin-brand span,
+        .admin-nav-title,
+        .admin-nav a span {
+            display: none;
+        }
+
+        .admin-nav a {
+            justify-content: center;
+        }
+
+        .admin-main {
+            margin-left: 75px;
+            width: calc(100% - 75px);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .admin-sidebar {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .admin-main {
+            margin-left: 0;
+            width: 100%;
+            padding: 15px;
+        }
+    }
+</style>
+
+<div class="admin-layout">
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-brand">
+            <div class="admin-brand-icon">
+                <i class="fa-solid fa-code"></i>
+            </div>
+            <span>DevWorkspace</span>
+        </div>
+
+        <div class="admin-nav-title">Administration</div>
+
+        <nav class="admin-nav">
+
+            <a href="{{ url_for('admin.index') }}" class="active">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('admin.users') }}">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </a>
+
+            <a href="{{ url_for('admin.projects') }}">
+                <i class="fa-solid fa-folder"></i>
+                <span>Projects</span>
+            </a>
+
+            <a href="{{ url_for('admin.settings') }}">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="{{ url_for('dashboard.index') }}">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>User Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('admin.logout') }}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="admin-main">
+
+        <div class="admin-topbar">
+
+            <div>
+                <h4 class="mb-1">Admin Dashboard</h4>
+                <small class="text-secondary">
+                    Manage your DevWorkspace platform
+                </small>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <div class="admin-avatar">
+                    {{ current_user.username[0]|upper }}
+                </div>
+
+                <strong>
+                    {{ current_user.username }}
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="row g-4 mb-4">
+
+            <div class="col-md-6 col-xl-3">
+                <div class="admin-stat">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <h2>{{ total_users }}</h2>
+                    <p>Total Users</p>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="admin-stat">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+
+                    <h2>{{ total_projects }}</h2>
+                    <p>Total Projects</p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-7">
+
+                <div class="admin-panel">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <div>
+                            <h5 class="mb-1">Recent Users</h5>
+                            <small class="text-secondary">
+                                Latest registered users
+                            </small>
+                        </div>
+
+                        <a href="{{ url_for('admin.users') }}"
+                           class="admin-btn admin-btn-primary">
+                            View All
+                        </a>
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="admin-table">
+
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>ID</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            {% for user in recent_users %}
+
+                                <tr>
+
+                                    <td>
+                                        <div class="admin-user">
+
+                                            <div class="admin-avatar">
+                                                {{ user.username[0]|upper }}
+                                            </div>
+
+                                            <strong>
+                                                {{ user.username }}
+                                            </strong>
+
+                                        </div>
+                                    </td>
+
+                                    <td>{{ user.email }}</td>
+
+                                    <td>#{{ user.id }}</td>
+
+                                </tr>
+
+                            {% else %}
+
+                                <tr>
+                                    <td colspan="3" class="text-center py-4">
+                                        No users found.
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-5">
+
+                <div class="admin-panel">
+
+                    <div class="mb-3">
+                        <h5 class="mb-1">Recent Projects</h5>
+                        <small class="text-secondary">
+                            Latest workspace projects
+                        </small>
+                    </div>
+
+                    {% for project in recent_projects %}
+
+                        <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+
+                            <div class="admin-stat-icon mb-0">
+                                <i class="fa-solid fa-folder"></i>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    {{ project.name }}
+                                </strong>
+
+                                <div class="small text-secondary">
+                                    Project #{{ project.id }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="text-center text-secondary py-4">
+                            No projects found.
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}

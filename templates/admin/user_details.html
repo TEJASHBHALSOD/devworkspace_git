@@ -1,0 +1,125 @@
+<!-- templates/admin/user_details.html -->
+
+{% extends "base_auth.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+
+        <a href="{{ url_for('admin.users') }}"
+           class="btn btn-light">
+            <i class="fa-solid fa-arrow-left me-1"></i>
+            Back to Users
+        </a>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+
+                <div
+                    class="rounded-circle bg-primary-subtle text-primary
+                           d-flex align-items-center justify-content-center"
+                    style="width:70px;height:70px;font-size:25px;font-weight:700;"
+                >
+                    {{ user.username[0]|upper }}
+                </div>
+
+                <div>
+
+                    <h3 class="mb-1">
+                        {{ user.username }}
+                    </h3>
+
+                    <p class="text-secondary mb-0">
+                        {{ user.email }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        User ID
+                    </small>
+
+                    <div class="fw-semibold">
+                        #{{ user.id }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        Username
+                    </small>
+
+                    <div class="fw-semibold">
+                        {{ user.username }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        Email
+                    </small>
+
+                    <div class="fw-semibold">
+                        {{ user.email }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        Role
+                    </small>
+
+                    <div>
+
+                        {% if user.is_admin %}
+                            <span class="badge bg-danger">Administrator</span>
+                        {% else %}
+                            <span class="badge bg-primary">User</span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+
+                <a
+                    href="{{ url_for('admin.edit_user', user_id=user.id) }}"
+                    class="btn btn-primary"
+                >
+                    <i class="fa-solid fa-pen me-1"></i>
+                    Edit User
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

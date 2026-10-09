@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+{% set active_admin_page='users' %}
+{% block admin_breadcrumb %}{{ 'Edit User' if user else 'Add User' }}{% endblock %}
+{% block admin_content %}
+<div class="ad-heading"><div><h1>{{ 'Edit Registered User' if user else 'Add Registered User' }}</h1><p>Administrator accounts are managed separately. Every account created from this page is a normal User.</p></div><a class="ad-btn ad-outline" href="{{ url_for('admin.users') }}">Users</a></div>
+<div class="ad-grid2">
+  <section class="ad-card"><div class="ad-body"><form method="POST">
+    <div class="ad-field"><label class="ad-label">Username *</label><input class="ad-input" name="username" value="{{ user.username if user else '' }}" required></div>
+    <div class="ad-field"><label class="ad-label">Email *</label><input class="ad-input" type="email" name="email" value="{{ user.email if user else '' }}" required></div>
+    <div class="ad-field"><label class="ad-label">{{ 'New Password' if user else 'Password *' }}</label><input class="ad-input" type="password" name="password" {{ '' if user else 'required' }} placeholder="{{ 'Leave blank to keep current password' if user else 'Create password' }}"></div>
+    <div class="ad-form-actions"><a class="ad-btn ad-outline" href="{{ url_for('admin.users') }}">Cancel</a><button class="ad-btn"><i class="fa-solid fa-save"></i> Save User</button></div>
+  </form></div></section>
+  <section class="ad-card"><div class="ad-head"><span class="ad-title">Account Role</span></div><div class="ad-body"><span class="ad-badge green">User</span><p style="color:#94a3b8;font-size:.67rem;line-height:1.7;margin:12px 0 0">This page never creates or changes administrator accounts. The separate Admin Portal uses its own administrator session.</p></div></section>
+</div>
+{% endblock %}

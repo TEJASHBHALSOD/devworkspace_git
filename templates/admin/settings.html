@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% set active_admin_page='settings' %}
+{% block admin_breadcrumb %}Settings{% endblock %}
+{% block admin_content %}
+<div class="ad-heading"><div><h1>System Settings</h1><p>Configure application defaults, registration and the Word learning-content importer.</p></div></div>
+<form method="POST">
+  <div class="ad-grid2">
+    <section class="ad-card"><div class="ad-head"><span class="ad-title">Application</span></div><div class="ad-body">
+      <div class="ad-field"><label class="ad-label">Application Name</label><input class="ad-input" name="application_name" value="{{ settings.get('application_name','DevWorkspace') }}"></div>
+      <div class="ad-field"><label class="ad-label">Default Language</label><input class="ad-input" name="default_language" value="{{ settings.get('default_language','Python') }}"></div>
+      <div class="ad-field"><label class="ad-label">Support Email</label><input class="ad-input" type="email" name="support_email" value="{{ settings.get('support_email','') }}" placeholder="support@example.com"></div>
+      <div class="ad-grid2"><div class="ad-field"><label class="ad-label">User Registration</label><select class="ad-select" name="allow_registration"><option value="enabled" {% if settings.get('allow_registration','enabled')=='enabled' %}selected{% endif %}>Enabled</option><option value="disabled" {% if settings.get('allow_registration')=='disabled' %}selected{% endif %}>Disabled</option></select></div><div class="ad-field"><label class="ad-label">Maintenance Mode</label><select class="ad-select" name="maintenance_mode"><option value="disabled" {% if settings.get('maintenance_mode','disabled')=='disabled' %}selected{% endif %}>Disabled</option><option value="enabled" {% if settings.get('maintenance_mode')=='enabled' %}selected{% endif %}>Enabled</option></select></div></div>
+    </div></section>
+
+    <section class="ad-card"><div class="ad-head"><span class="ad-title">Learning Content</span></div><div class="ad-body">
+      <div class="ad-field"><label class="ad-label">Default Course Status</label><select class="ad-select" name="default_course_status"><option value="draft" {% if settings.get('default_course_status','draft')=='draft' %}selected{% endif %}>Draft</option><option value="published" {% if settings.get('default_course_status')=='published' %}selected{% endif %}>Published</option></select></div>
+      <div class="ad-field"><label class="ad-label">Word Import</label><select class="ad-select" name="import_enabled"><option value="enabled" {% if settings.get('import_enabled','enabled')=='enabled' %}selected{% endif %}>Enabled</option><option value="disabled" {% if settings.get('import_enabled')=='disabled' %}selected{% endif %}>Disabled</option></select></div>
+      <div class="ad-field"><label class="ad-label">Imported Content Default</label><select class="ad-select" name="import_default_status"><option value="published" {% if settings.get('import_default_status','published')=='published' %}selected{% endif %}>Published</option><option value="draft" {% if settings.get('import_default_status')=='draft' %}selected{% endif %}>Draft</option></select></div>
+      <div class="ad-field"><label class="ad-label">Maximum Word File Size (MB)</label><input class="ad-input" type="number" min="1" max="100" name="import_max_mb" value="{{ settings.get('import_max_mb','10') }}"></div>
+      <div class="ad-field"><label class="ad-label">Update Existing Content by Title</label><select class="ad-select" name="auto_update_existing"><option value="enabled" {% if settings.get('auto_update_existing','enabled')=='enabled' %}selected{% endif %}>Enabled</option><option value="disabled" {% if settings.get('auto_update_existing')=='disabled' %}selected{% endif %}>Disabled</option></select></div>
+    </div></section>
+  </div>
+  <div class="ad-card mt-4"><div class="ad-head"><span class="ad-title">Import Rules</span></div><div class="ad-body"><div class="ad-grid3"><div><strong style="font-size:.7rem">Language</strong><p style="color:#64748b;font-size:.62rem;line-height:1.6">Created or matched by language name.</p></div><div><strong style="font-size:.7rem">Course Structure</strong><p style="color:#64748b;font-size:.62rem;line-height:1.6">Word Heading 1/2/3 and common labels become course content.</p></div><div><strong style="font-size:.7rem">Learning Items</strong><p style="color:#64748b;font-size:.62rem;line-height:1.6">Examples contain code; exercises contain instructions/starter code; quizzes contain questions.</p></div></div></div></div>
+  <div class="ad-form-actions mt-4"><button class="ad-btn"><i class="fa-solid fa-save"></i> Save Settings</button></div>
+</form>
+{% endblock %}

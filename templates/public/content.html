@@ -1,0 +1,192 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+    <main style="padding-top: calc(var(--navbar-height) + 2rem);">
+    <!-- Header -->
+    <section class="py-5 text-center bg-surface-secondary border-bottom">
+      <div class="container">
+        <span class="section-tag">Learning Catalog</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">Explore Tracks, Courses &amp; Quizzes</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 720px;">
+          Choose your learning pathway, practice with interactive exercises, and test your skills with dynamic quizzes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Programming Languages Catalog -->
+    <section class="public-section">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h2 class="h3 fw-bold text-dark mb-0">Active Programming Tracks</h2>
+          <a href="../auth/login.html" class="btn-app-outline btn-app-sm">Log in to Track Progress</a>
+        </div>
+
+        <div class="row g-4 mb-5">
+          <!-- Python -->
+          <div class="col-md-6 col-lg-3">
+            <div class="app-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <i class="fa-brands fa-python fs-1" style="color: #3776ab;"></i>
+                  <span class="app-badge app-badge-success">Active</span>
+                </div>
+                <h3 class="h5 fw-bold text-dark mb-2">Python</h3>
+                <p class="text-muted fs-sm mb-3">Variables, data structures, control flow, functions, OOP, and script automation.</p>
+                <div class="text-secondary fs-xs mb-3">
+                  <div><i class="fa-solid fa-book-open me-2 text-primary"></i>4 Courses • 32 Lessons</div>
+                  <div><i class="fa-solid fa-code me-2 text-primary"></i>20 Interactive Exercises</div>
+                </div>
+              </div>
+              <a href="../learning/languages.html" class="btn-app-primary btn-app-sm w-100">View Curriculum</a>
+            </div>
+          </div>
+
+          <!-- HTML5 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="app-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <i class="fa-brands fa-html5 fs-1" style="color: #e34f26;"></i>
+                  <span class="app-badge app-badge-success">Active</span>
+                </div>
+                <h3 class="h5 fw-bold text-dark mb-2">HTML5</h3>
+                <p class="text-muted fs-sm mb-3">Modern semantic tags, accessible forms, audio/video embeds, and SEO markup.</p>
+                <div class="text-secondary fs-xs mb-3">
+                  <div><i class="fa-solid fa-book-open me-2 text-primary"></i>2 Courses • 16 Lessons</div>
+                  <div><i class="fa-solid fa-code me-2 text-primary"></i>12 Interactive Exercises</div>
+                </div>
+              </div>
+              <a href="../learning/languages.html" class="btn-app-primary btn-app-sm w-100">View Curriculum</a>
+            </div>
+          </div>
+
+          <!-- CSS3 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="app-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <i class="fa-brands fa-css3-alt fs-1" style="color: #1572b6;"></i>
+                  <span class="app-badge app-badge-success">Active</span>
+                </div>
+                <h3 class="h5 fw-bold text-dark mb-2">CSS3</h3>
+                <p class="text-muted fs-sm mb-3">Flexbox layouts, CSS Grid systems, variables, keyframe animations, and media queries.</p>
+                <div class="text-secondary fs-xs mb-3">
+                  <div><i class="fa-solid fa-book-open me-2 text-primary"></i>3 Courses • 22 Lessons</div>
+                  <div><i class="fa-solid fa-code me-2 text-primary"></i>15 Interactive Exercises</div>
+                </div>
+              </div>
+              <a href="../learning/languages.html" class="btn-app-primary btn-app-sm w-100">View Curriculum</a>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="col-md-6 col-lg-3">
+            <div class="app-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <i class="fa-brands fa-js fs-1" style="color: #f7df1e;"></i>
+                  <span class="app-badge app-badge-success">Active</span>
+                </div>
+                <h3 class="h5 fw-bold text-dark mb-2">JavaScript</h3>
+                <p class="text-muted fs-sm mb-3">ES6+ syntax, DOM manipulation, promises, async/await, and REST API integration.</p>
+                <div class="text-secondary fs-xs mb-3">
+                  <div><i class="fa-solid fa-book-open me-2 text-primary"></i>5 Courses • 38 Lessons</div>
+                  <div><i class="fa-solid fa-code me-2 text-primary"></i>25 Interactive Exercises</div>
+                </div>
+              </div>
+              <a href="../learning/languages.html" class="btn-app-primary btn-app-sm w-100">View Curriculum</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Languages Track -->
+        <h3 class="h4 fw-bold text-dark mb-3">Upcoming Language Expansions</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-6 col-md-3">
+            <div class="app-card p-3 text-center opacity-75">
+              <i class="fa-brands fa-java fs-2 mb-2" style="color: #e76f00;"></i>
+              <h4 class="h6 fw-bold text-dark mb-1">Java Core</h4>
+              <span class="app-badge app-badge-neutral">Coming Soon</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="app-card p-3 text-center opacity-75">
+              <i class="fa-solid fa-code fs-2 mb-2" style="color: #00599c;"></i>
+              <h4 class="h6 fw-bold text-dark mb-1">C &amp; C++</h4>
+              <span class="app-badge app-badge-neutral">Coming Soon</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="app-card p-3 text-center opacity-75">
+              <i class="fa-brands fa-php fs-2 mb-2" style="color: #777bb4;"></i>
+              <h4 class="h6 fw-bold text-dark mb-1">PHP 8+</h4>
+              <span class="app-badge app-badge-neutral">Coming Soon</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="app-card p-3 text-center opacity-75">
+              <i class="fa-solid fa-database fs-2 mb-2" style="color: #003b57;"></i>
+              <h4 class="h6 fw-bold text-dark mb-1">SQL &amp; SQLite</h4>
+              <span class="app-badge app-badge-neutral">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Popular Courses -->
+        <h3 class="h4 fw-bold text-dark mb-4">Featured Popular Courses</h3>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="app-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between">
+              <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=400&q=80" alt="Python" class="w-100" style="height: 160px; object-fit: cover;">
+              <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="app-badge app-badge-primary">Beginner</span>
+                    <small class="text-muted"><i class="fa-regular fa-clock me-1"></i>4.5 hours</small>
+                  </div>
+                  <h4 class="h6 fw-bold text-dark mb-2">Python Fundamentals &amp; Syntax</h4>
+                  <p class="text-muted fs-sm mb-3">Master core python variables, arithmetic, conditions, loops, and functions.</p>
+                </div>
+                <a href="../learning/course-detail.html?id=py-101" class="btn-app-secondary btn-app-sm w-100">Course Outline</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="app-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between">
+              <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=400&q=80" alt="CSS" class="w-100" style="height: 160px; object-fit: cover;">
+              <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="app-badge app-badge-warning">Intermediate</span>
+                    <small class="text-muted"><i class="fa-regular fa-clock me-1"></i>5.5 hours</small>
+                  </div>
+                  <h4 class="h6 fw-bold text-dark mb-2">Mastering CSS Grid &amp; Flexbox</h4>
+                  <p class="text-muted fs-sm mb-3">Construct multi-screen responsive interfaces with modern CSS standards.</p>
+                </div>
+                <a href="../learning/course-detail.html?id=css-101" class="btn-app-secondary btn-app-sm w-100">Course Outline</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="app-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between">
+              <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?auto=format&fit=crop&w=400&q=80" alt="JavaScript" class="w-100" style="height: 160px; object-fit: cover;">
+              <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="app-badge app-badge-warning">Intermediate</span>
+                    <small class="text-muted"><i class="fa-regular fa-clock me-1"></i>7.0 hours</small>
+                  </div>
+                  <h4 class="h6 fw-bold text-dark mb-2">JavaScript ES6+ Essentials</h4>
+                  <p class="text-muted fs-sm mb-3">Arrow functions, destructuring, promises, async/await, and APIs.</p>
+                </div>
+                <a href="../learning/course-detail.html?id=js-101" class="btn-app-secondary btn-app-sm w-100">Course Outline</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock  %}

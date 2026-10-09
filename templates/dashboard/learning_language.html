@@ -1,0 +1,10 @@
+{% extends "base_auth.html" %}
+{% set active_page='languages' %}
+{% block content %}
+{% include "partials/user_shell.html" %}
+{% block desktop_content %}
+<div class="dw-page-head"><div><h1>{{ language.name }}</h1><p>{{ language.version }} · {{ language.category|title }} · Published learning content</p></div><a class="dw-btn dw-btn-outline" href="{{ url_for('learning.index') }}">Learning Center</a></div>
+<div class="dw-panel mb-4"><div class="dw-panel-body"><p style="margin:0;color:#94a3b8;font-size:.7rem;line-height:1.7">{{ language.description or 'No description available.' }}</p></div></div>
+<div class="dw-grid-3">{% for course in courses %}<a class="dw-card" href="{{ url_for('learning.course_detail',course_id=course.id) }}"><div class="dw-card-icon"><i class="fa-solid fa-book-open"></i></div><h3>{{ course.title }}</h3><p>{{ course.level|title }} · {{ course.chapters|length }} chapter(s)</p><span class="dw-btn dw-btn-outline w-100 mt-3 d-inline-flex justify-content-center">Open Course</span></a>{% else %}<div class="dw-panel" style="grid-column:1/-1"><div class="dw-empty">No published courses for this language.</div></div>{% endfor %}</div>
+{% endblock %}
+{% endblock %}

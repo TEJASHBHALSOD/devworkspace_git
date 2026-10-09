@@ -1,0 +1,4 @@
+{% extends "admin/base.html" %}{% set active_admin_page='activity' %}{% block admin_breadcrumb %}Activity Logs{% endblock %}{% block admin_content %}
+<div class="ad-heading"><div><h1>Activity Logs</h1><p>Important admin actions recorded by the application.</p></div></div>
+<div class="ad-card"><div class="ad-table-wrap"><table class="ad-table"><thead><tr><th>Time</th><th>Action</th><th>Entity</th><th>Entity ID</th><th>User ID</th></tr></thead><tbody>{% for a in activities %}<tr><td>{{ a.created_at.strftime('%d %b %Y %I:%M %p') if a.created_at else '-' }}</td><td>{{ a.action }}</td><td><span class="ad-badge">{{ a.entity_type }}</span></td><td>{{ a.entity_id or '-' }}</td><td>{{ a.user_id or '-' }}</td></tr>{% else %}<tr><td colspan="5"><div class="ad-empty">No activity recorded yet.</div></td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

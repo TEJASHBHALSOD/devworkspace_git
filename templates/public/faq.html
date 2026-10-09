@@ -1,0 +1,146 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+    <main style="padding-top: calc(var(--navbar-height) + 2rem);">
+    <!-- Header -->
+    <section class="py-5 text-center bg-surface-secondary border-bottom">
+      <div class="container">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">Answers to Common Questions</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 720px;">
+          Find helpful answers regarding our learning paths, code workspace, file management, backup snapshots, and account settings.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="public-section">
+      <div class="container" style="max-width: 840px;">
+        <div class="accordion" id="faqAccordion">
+          
+          <!-- Category 1: General -->
+          <div class="mb-4">
+            <h3 class="h5 fw-bold text-primary mb-3"><i class="fa-solid fa-circle-info me-2"></i>General Overview</h3>
+            
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                  What is DevWorkspace?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  DevWorkspace is an educational web application designed for students and developers to learn programming languages (Python, HTML, CSS, JavaScript), test code in an in-browser workspace, manage project files, and maintain snapshot backups.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                  Is DevWorkspace free to use?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Yes, DevWorkspace is open and free for students and developers as part of an academic IT research initiative.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2: Account & Security -->
+          <div class="mb-4">
+            <h3 class="h5 fw-bold text-primary mb-3"><i class="fa-solid fa-user-shield me-2"></i>Account &amp; Security</h3>
+            
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                  How does frontend authentication work in demo mode?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  In this current frontend phase, authentication state is simulated using browser <code>localStorage</code>. When connected to the Python Flask + SQLite backend later, sessions will be managed via secure HTTP-only session cookies and JWT tokens.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3: Learning & Quizzes -->
+          <div class="mb-4">
+            <h3 class="h5 fw-bold text-primary mb-3"><i class="fa-solid fa-graduation-cap me-2"></i>Learning &amp; Quizzes</h3>
+            
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                  Can I retake quizzes to improve my score?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Yes! All quizzes can be retaken at any time. You can review detailed question breakdowns, explanations for incorrect answers, and track your mastery score.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 4: Code Workspace & Projects -->
+          <div class="mb-4">
+            <h3 class="h5 fw-bold text-primary mb-3"><i class="fa-solid fa-code me-2"></i>Workspace &amp; Projects</h3>
+            
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                  Do I need to install Python or Node.js locally?
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  No local installations are required. The web workspace provides an in-browser code editor and client-side simulation engine so you can code directly from any device.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 5: Backup & Restore -->
+          <div class="mb-4">
+            <h3 class="h5 fw-bold text-primary mb-3"><i class="fa-solid fa-cloud-arrow-up me-2"></i>Backup &amp; Restore</h3>
+            
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+                  How does the backup and restore system safeguard my code?
+                </button>
+              </h2>
+              <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  DevWorkspace creates compressed archive snapshots of your workspace files and notes. When restoring, the preview dialog detects naming conflicts and lets you choose between Skip, Replace, or Rename policies.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 6: Admin Management -->
+          <div class="mb-4">
+            <h3 class="h5 fw-bold text-primary mb-3"><i class="fa-solid fa-user-gear me-2"></i>Admin Management</h3>
+            
+            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+              <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
+                  How do instructors access the Admin Portal?
+                </button>
+              </h2>
+              <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Instructors log in using administrator credentials (demo: <code>admin@devworkspace.io</code> / <code>Admin123!</code>). The Admin Portal provides curriculum CRUD management, user status toggling, and global activity audit logs.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock  %}

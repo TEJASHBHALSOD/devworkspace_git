@@ -1,0 +1,2140 @@
+```html
+{% extends "base_auth.html" %}
+
+{% block content %}
+
+<style>
+
+    :root {
+        --dw-bg: #080b12;
+        --dw-surface: #0e141d;
+        --dw-surface-2: #111923;
+        --dw-border: rgba(255,255,255,.075);
+        --dw-text: #f8fafc;
+        --dw-muted: #94a3b8;
+        --dw-dim: #64748b;
+        --dw-primary: #8b5cf6;
+        --dw-primary2: #6366f1;
+        --sidebar-width: 250px;
+    }
+
+
+    html,
+    body {
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        min-height: 100%;
+
+        background:
+            var(--dw-bg) !important;
+
+        color:
+            var(--dw-text);
+
+    }
+
+
+    body {
+
+        overflow-x: hidden;
+
+    }
+
+
+    /* =================================
+       CUSTOM SCROLLBAR
+    ================================= */
+
+    * {
+
+        scrollbar-width: thin;
+
+        scrollbar-color:
+            #6d55c9
+            #080b12;
+
+    }
+
+
+    *::-webkit-scrollbar {
+
+        width: 7px;
+        height: 7px;
+
+    }
+
+
+    *::-webkit-scrollbar-track {
+
+        background:
+            #080b12;
+
+    }
+
+
+    *::-webkit-scrollbar-thumb {
+
+        background:
+            linear-gradient(
+                180deg,
+                #4f46e5,
+                #8b5cf6
+            );
+
+        border-radius:
+            20px;
+
+        border:
+            1px solid #080b12;
+
+    }
+
+
+    *::-webkit-scrollbar-thumb:hover {
+
+        background:
+            linear-gradient(
+                180deg,
+                #6366f1,
+                #a855f7
+            );
+
+    }
+
+
+    /* =================================
+       APP
+    ================================= */
+
+    .dw-app {
+
+        min-height: 100vh;
+
+        display: flex;
+
+        background:
+            radial-gradient(
+                circle at 75% 0%,
+                rgba(99,102,241,.07),
+                transparent 30%
+            ),
+            var(--dw-bg);
+
+    }
+
+
+    /* =================================
+       SIDEBAR
+    ================================= */
+
+    .dw-sidebar {
+
+        width:
+            var(--sidebar-width);
+
+        position: fixed;
+
+        inset:
+            0 auto 0 0;
+
+        z-index: 1000;
+
+        display: flex;
+
+        flex-direction: column;
+
+        background:
+            rgba(11,16,24,.98);
+
+        border-right:
+            1px solid var(--dw-border);
+
+        transition:
+            transform .3s ease;
+
+    }
+
+
+    .dw-brand {
+
+        height: 72px;
+
+        display: flex;
+
+        align-items: center;
+
+        padding:
+            0 22px;
+
+        border-bottom:
+            1px solid var(--dw-border);
+
+    }
+
+
+    .dw-brand a {
+
+        display: flex;
+
+        align-items: center;
+
+        text-decoration: none;
+
+    }
+
+
+    .dw-logo {
+
+        width: 39px;
+        height: 39px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 11px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+        box-shadow:
+            0 8px 25px
+            rgba(99,102,241,.25);
+
+    }
+
+
+    .dw-brand-name {
+
+        margin-left: 11px;
+
+        color: white;
+
+        font-size: 16px;
+
+        font-weight: 700;
+
+    }
+
+
+    .dw-brand-name span {
+
+        color:
+            #a78bfa;
+
+    }
+
+
+    .dw-user-mini {
+
+        margin:
+            18px 15px;
+
+        padding:
+            12px;
+
+        display: flex;
+
+        align-items: center;
+
+        border-radius:
+            12px;
+
+        background:
+            rgba(255,255,255,.025);
+
+        border:
+            1px solid rgba(255,255,255,.05);
+
+    }
+
+
+    .dw-avatar {
+
+        width: 36px;
+        height: 36px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        border-radius: 10px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #6366f1,
+                #a855f7
+            );
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+    }
+
+
+    .dw-user-info {
+
+        min-width: 0;
+
+        margin-left: 10px;
+
+    }
+
+
+    .dw-user-name {
+
+        color:
+            #e2e8f0;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+    .dw-user-role {
+
+        margin-top: 2px;
+
+        color:
+            #64748b;
+
+        font-size: 10px;
+
+    }
+
+
+    /* =================================
+       NAV
+    ================================= */
+
+    .dw-nav {
+
+        flex: 1;
+
+        padding:
+            4px 13px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .dw-section {
+
+        margin:
+            20px 9px 8px;
+
+        color:
+            #475569;
+
+        font-size: 9px;
+
+        font-weight: 700;
+
+        letter-spacing:
+            .13em;
+
+        text-transform:
+            uppercase;
+
+    }
+
+
+    .dw-nav-item {
+
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+
+        padding:
+            10px 12px;
+
+        margin-bottom: 3px;
+
+        border-radius: 9px;
+
+        color:
+            #7f8ea3;
+
+        font-size: 12px;
+
+        text-decoration: none;
+
+        transition: .2s;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .dw-nav-item i {
+
+        width: 17px;
+
+        text-align: center;
+
+    }
+
+
+    .dw-nav-item:hover {
+
+        color:
+            #e2e8f0;
+
+        background:
+            rgba(255,255,255,.04);
+
+        transform:
+            translateX(2px);
+
+    }
+
+
+    .dw-nav-item.active {
+
+        color:
+            #c4b5fd;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(99,102,241,.16),
+                rgba(139,92,246,.07)
+            );
+
+        border:
+            1px solid rgba(139,92,246,.1);
+
+    }
+
+
+    .dw-nav-item.active i {
+
+        color:
+            #a78bfa;
+
+    }
+
+
+    .dw-sidebar-bottom {
+
+        padding:
+            13px;
+
+        border-top:
+            1px solid var(--dw-border);
+
+    }
+
+
+    /* =================================
+       MAIN
+    ================================= */
+
+    .dw-main {
+
+        width:
+            calc(100% - var(--sidebar-width));
+
+        margin-left:
+            var(--sidebar-width);
+
+        min-height:
+            100vh;
+
+    }
+
+
+    .dw-topbar {
+
+        height: 72px;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 900;
+
+        display: flex;
+
+        align-items: center;
+
+        padding:
+            0 30px;
+
+        background:
+            rgba(8,11,18,.88);
+
+        border-bottom:
+            1px solid var(--dw-border);
+
+        backdrop-filter:
+            blur(18px);
+
+    }
+
+
+    .dw-mobile-toggle {
+
+        display: none;
+
+        border: 0;
+
+        background: transparent;
+
+        color:
+            #94a3b8;
+
+        font-size: 18px;
+
+        margin-right: 15px;
+
+    }
+
+
+    .dw-search {
+
+        width:
+            380px;
+
+        position: relative;
+
+    }
+
+
+    .dw-search i {
+
+        position: absolute;
+
+        left: 14px;
+
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+        color:
+            #475569;
+
+        font-size: 11px;
+
+    }
+
+
+    .dw-search input {
+
+        width: 100%;
+
+        height: 39px;
+
+        box-sizing: border-box;
+
+        padding:
+            0 42px;
+
+        border-radius:
+            9px;
+
+        border:
+            1px solid var(--dw-border);
+
+        background:
+            #0b1018;
+
+        color:
+            #e2e8f0;
+
+        outline: none;
+
+        font-size: 12px;
+
+    }
+
+
+    .dw-search input:focus {
+
+        border-color:
+            rgba(139,92,246,.45);
+
+        box-shadow:
+            0 0 0 3px
+            rgba(139,92,246,.07);
+
+    }
+
+
+    .dw-top-right {
+
+        margin-left:
+            auto;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+    }
+
+
+    .dw-top-btn {
+
+        width: 38px;
+        height: 38px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid transparent;
+
+        border-radius: 9px;
+
+        color:
+            #64748b;
+
+        background:
+            transparent;
+
+        cursor: pointer;
+
+    }
+
+
+    .dw-top-btn:hover {
+
+        color:
+            #cbd5e1;
+
+        background:
+            rgba(255,255,255,.04);
+
+        border-color:
+            var(--dw-border);
+
+    }
+
+
+    .dw-user-top {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        margin-left: 5px;
+
+        padding:
+            5px 8px 5px 5px;
+
+        color:
+            #cbd5e1;
+
+        font-size: 11px;
+
+        text-decoration: none;
+
+    }
+
+
+    .dw-user-top .dw-avatar {
+
+        width: 31px;
+        height: 31px;
+
+        border-radius: 8px;
+
+        font-size: 10px;
+
+    }
+
+
+    /* =================================
+       CONTENT
+    ================================= */
+
+    .dw-content {
+
+        padding:
+            32px;
+
+        max-width:
+            1550px;
+
+        margin: auto;
+
+    }
+
+
+    .dw-page-head {
+
+        display: flex;
+
+        align-items: flex-end;
+
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .dw-page-head h1 {
+
+        margin:
+            0 0 7px;
+
+        color:
+            #f8fafc;
+
+        font-size: 25px;
+
+        letter-spacing:
+            -.035em;
+
+    }
+
+
+    .dw-page-head p {
+
+        margin: 0;
+
+        color:
+            #64748b;
+
+        font-size: 12px;
+
+    }
+
+
+    /* =================================
+       BUTTON
+    ================================= */
+
+    .dw-btn {
+
+        border: 0;
+
+        border-radius: 9px;
+
+        padding:
+            10px 14px;
+
+        color:
+            white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+        font-size: 11px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: .2s;
+
+    }
+
+
+    .dw-btn:hover {
+
+        filter:
+            brightness(1.08);
+
+        transform:
+            translateY(-1px);
+
+    }
+
+
+    .dw-btn-secondary {
+
+        color:
+            #cbd5e1;
+
+        background:
+            #111923;
+
+        border:
+            1px solid var(--dw-border);
+
+    }
+
+
+    /* =================================
+       FOLDER CARDS
+    ================================= */
+
+    .dw-folder-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+        gap: 15px;
+
+        margin-bottom: 22px;
+
+    }
+
+
+    .dw-folder-card {
+
+        padding:
+            18px;
+
+        background:
+            var(--dw-surface);
+
+        border:
+            1px solid var(--dw-border);
+
+        border-radius:
+            13px;
+
+        cursor: pointer;
+
+        transition: .2s;
+
+    }
+
+
+    .dw-folder-card:hover {
+
+        transform:
+            translateY(-2px);
+
+        border-color:
+            rgba(139,92,246,.25);
+
+    }
+
+
+    .dw-folder-icon {
+
+        width: 40px;
+        height: 40px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        color:
+            #a78bfa;
+
+        background:
+            rgba(139,92,246,.1);
+
+        margin-bottom: 14px;
+
+    }
+
+
+    .dw-folder-card h3 {
+
+        margin:
+            0 0 6px;
+
+        color:
+            #e2e8f0;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .dw-folder-card p {
+
+        margin: 0;
+
+        color:
+            #64748b;
+
+        font-size:
+            9px;
+
+    }
+
+
+    /* =================================
+       EXPLORER
+    ================================= */
+
+    .dw-panel {
+
+        overflow: hidden;
+
+        background:
+            var(--dw-surface);
+
+        border:
+            1px solid var(--dw-border);
+
+        border-radius:
+            14px;
+
+    }
+
+
+    .dw-panel-head {
+
+        padding:
+            17px 19px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        border-bottom:
+            1px solid var(--dw-border);
+
+    }
+
+
+    .dw-panel-title {
+
+        color:
+            #e2e8f0;
+
+        font-size:
+            12px;
+
+        font-weight:
+            650;
+
+    }
+
+
+    .dw-panel-actions {
+
+        display: flex;
+
+        gap: 8px;
+
+    }
+
+
+    .dw-panel-body {
+
+        padding:
+            19px;
+
+    }
+
+
+    /* =================================
+       TABLE
+    ================================= */
+
+    .dw-table-wrap {
+
+        overflow-x: auto;
+
+    }
+
+
+    .dw-table {
+
+        width: 100%;
+
+        min-width: 700px;
+
+        border-collapse:
+            collapse;
+
+    }
+
+
+    .dw-table th {
+
+        padding:
+            12px 15px;
+
+        text-align:
+            left;
+
+        color:
+            #475569;
+
+        font-size:
+            9px;
+
+        font-weight:
+            700;
+
+        text-transform:
+            uppercase;
+
+        letter-spacing:
+            .07em;
+
+        border-bottom:
+            1px solid var(--dw-border);
+
+    }
+
+
+    .dw-table td {
+
+        padding:
+            14px 15px;
+
+        color:
+            #94a3b8;
+
+        font-size:
+            10px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,.045);
+
+    }
+
+
+    .dw-table tr:hover td {
+
+        background:
+            rgba(255,255,255,.015);
+
+    }
+
+
+    .dw-badge {
+
+        display:
+            inline-flex;
+
+        padding:
+            4px 8px;
+
+        border-radius:
+            20px;
+
+        color:
+            #c4b5fd;
+
+        background:
+            rgba(139,92,246,.1);
+
+        font-size:
+            9px;
+
+    }
+
+
+    .dw-badge.green {
+
+        color:
+            #86efac;
+
+        background:
+            rgba(34,197,94,.08);
+
+    }
+
+
+    .dw-overlay {
+
+        display: none;
+
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 999;
+
+        background:
+            rgba(0,0,0,.55);
+
+        backdrop-filter:
+            blur(2px);
+
+    }
+
+
+    /* =================================
+       RESPONSIVE
+    ================================= */
+
+    @media(max-width:1100px) {
+
+        .dw-folder-grid {
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+        }
+
+    }
+
+
+    @media(max-width:900px) {
+
+        .dw-sidebar {
+
+            transform:
+                translateX(-100%);
+
+        }
+
+
+        .dw-sidebar.open {
+
+            transform:
+                translateX(0);
+
+        }
+
+
+        .dw-overlay.show {
+
+            display:
+                block;
+
+        }
+
+
+        .dw-main {
+
+            width: 100%;
+
+            margin-left: 0;
+
+        }
+
+
+        .dw-mobile-toggle {
+
+            display: block;
+
+        }
+
+
+        .dw-search {
+
+            flex: 1;
+
+            width: auto;
+
+        }
+
+
+        .dw-content {
+
+            padding:
+                23px 18px;
+
+        }
+
+    }
+
+
+    @media(max-width:600px) {
+
+        .dw-topbar {
+
+            padding:
+                0 15px;
+
+        }
+
+
+        .dw-content {
+
+            padding:
+                20px 14px;
+
+        }
+
+
+        .dw-folder-grid {
+
+            grid-template-columns:
+                1fr;
+
+        }
+
+
+        .dw-page-head {
+
+            align-items:
+                flex-start;
+
+            flex-direction:
+                column;
+
+        }
+
+
+        .dw-user-top span {
+
+            display: none;
+
+        }
+
+    }
+
+</style>
+
+
+<div class="dw-app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="dw-sidebar"
+           id="dwSidebar">
+
+
+        <div class="dw-brand">
+
+            <a href="{{ url_for('dashboard.index') }}">
+
+                <div class="dw-logo">
+
+                    <i class="fa-solid fa-code"></i>
+
+                </div>
+
+                <div class="dw-brand-name">
+
+                    Dev<span>Workspace</span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="dw-user-mini">
+
+            <div class="dw-avatar"
+                 id="sidebarAvatar">
+                U
+            </div>
+
+            <div class="dw-user-info">
+
+                <div class="dw-user-name"
+                     id="sidebarUsername">
+                    User
+                </div>
+
+                <div class="dw-user-role">
+                    Developer
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="dw-nav">
+
+            <div class="dw-section">
+                Workspace
+            </div>
+
+
+            <a href="{{ url_for('dashboard.index') }}"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-table-columns"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="{{ url_for('dashboard.workspace') }}"
+               class="dw-nav-item active">
+
+                <i class="fa-solid fa-folder-tree"></i>
+
+                My Workspace
+
+            </a>
+
+
+            <a href="{{ url_for('dashboard.projects') }}"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-code-branch"></i>
+
+                Projects
+
+            </a>
+
+
+            <a href="/files"
+               class="dw-nav-item">
+
+                <i class="fa-regular fa-file-code"></i>
+
+                Files
+
+            </a>
+
+
+            <div class="dw-section">
+                Learning
+            </div>
+
+
+            <a href="/courses"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                Courses
+
+            </a>
+
+
+            <a href="/languages"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-laptop-code"></i>
+
+                Languages
+
+            </a>
+
+
+            <a href="/progress"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                My Progress
+
+            </a>
+
+
+            <div class="dw-section">
+                Tools
+            </div>
+
+
+            <a href="/editor"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-terminal"></i>
+
+                Code Editor
+
+            </a>
+
+
+            <a href="/backups"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-box-archive"></i>
+
+                Backups
+
+            </a>
+
+        </nav>
+
+
+        <div class="dw-sidebar-bottom">
+
+            <a href="/settings"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </a>
+
+
+            <a href="/help"
+               class="dw-nav-item">
+
+                <i class="fa-regular fa-circle-question"></i>
+
+                Help & Support
+
+            </a>
+
+
+            <a href="{{ url_for('auth.logout') }}"
+               class="dw-nav-item">
+
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                Sign Out
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div class="dw-overlay"
+         id="dwOverlay">
+    </div>
+
+
+    <!-- MAIN -->
+
+    <main class="dw-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="dw-topbar">
+
+
+            <button class="dw-mobile-toggle"
+                    id="dwMobileToggle">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="dw-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    id="dwGlobalSearch"
+                    type="search"
+                    placeholder="Search projects, files, courses..."
+                >
+
+            </div>
+
+
+            <div class="dw-top-right">
+
+
+                <button
+                    class="dw-top-btn"
+                    onclick="dwToast('No new notifications')">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                </button>
+
+
+                <a href="/profile"
+                   class="dw-user-top">
+
+                    <div class="dw-avatar"
+                         id="topAvatar">
+                        U
+                    </div>
+
+                    <span id="topUsername">
+                        User
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <section class="dw-content">
+
+
+            <div class="dw-page-head">
+
+                <div>
+
+                    <h1>
+                        My Workspace
+                    </h1>
+
+                    <p>
+                        Manage your development folders,
+                        projects and files from one place.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="dw-btn"
+                    onclick="createFolder()">
+
+                    <i class="fa-solid fa-folder-plus"></i>
+
+                    New Folder
+
+                </button>
+
+            </div>
+
+
+            <!-- LANGUAGE FOLDERS -->
+
+            <div class="dw-folder-grid">
+
+
+                <div class="dw-folder-card"
+                     onclick="openFolder('Web Development')">
+
+                    <div class="dw-folder-icon">
+
+                        <i class="fa-solid fa-globe"></i>
+
+                    </div>
+
+                    <h3>
+                        Web Development
+                    </h3>
+
+                    <p>
+                        8 projects
+                    </p>
+
+                </div>
+
+
+                <div class="dw-folder-card"
+                     onclick="openFolder('Python')">
+
+                    <div class="dw-folder-icon">
+
+                        <i class="fa-brands fa-python"></i>
+
+                    </div>
+
+                    <h3>
+                        Python
+                    </h3>
+
+                    <p>
+                        3 projects
+                    </p>
+
+                </div>
+
+
+                <div class="dw-folder-card"
+                     onclick="openFolder('Java')">
+
+                    <div class="dw-folder-icon">
+
+                        <i class="fa-brands fa-java"></i>
+
+                    </div>
+
+                    <h3>
+                        Java
+                    </h3>
+
+                    <p>
+                        2 projects
+                    </p>
+
+                </div>
+
+
+                <div class="dw-folder-card"
+                     onclick="openFolder('PHP')">
+
+                    <div class="dw-folder-icon">
+
+                        <i class="fa-brands fa-php"></i>
+
+                    </div>
+
+                    <h3>
+                        PHP
+                    </h3>
+
+                    <p>
+                        4 projects
+                    </p>
+
+                </div>
+
+
+                <div class="dw-folder-card"
+                     onclick="openFolder('Resources')">
+
+                    <div class="dw-folder-icon">
+
+                        <i class="fa-solid fa-box-archive"></i>
+
+                    </div>
+
+                    <h3>
+                        Resources
+                    </h3>
+
+                    <p>
+                        18 files
+                    </p>
+
+                </div>
+
+
+                <div class="dw-folder-card"
+                     onclick="openFolder('Personal')">
+
+                    <div class="dw-folder-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <h3>
+                        Personal
+                    </h3>
+
+                    <p>
+                        6 files
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- EXPLORER -->
+
+            <div class="dw-panel">
+
+
+                <div class="dw-panel-head">
+
+                    <span class="dw-panel-title">
+
+                        Workspace Explorer
+
+                    </span>
+
+
+                    <div class="dw-panel-actions">
+
+                        <button
+                            class="dw-btn dw-btn-secondary"
+                            onclick="refreshExplorer()">
+
+                            <i class="fa-solid fa-rotate"></i>
+
+                            Refresh
+
+                        </button>
+
+
+                        <button
+                            class="dw-btn"
+                            onclick="createFolder()">
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            New Folder
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dw-table-wrap">
+
+                    <table class="dw-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Name
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Items
+                                </th>
+
+                                <th>
+                                    Modified
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <i
+                                        class="fa-solid fa-folder"
+                                        style="
+                                            color:#a78bfa;
+                                            margin-right:8px;
+                                        ">
+                                    </i>
+
+                                    Web Development
+
+                                </td>
+
+                                <td>
+                                    Folder
+                                </td>
+
+                                <td>
+                                    8 projects
+                                </td>
+
+                                <td>
+                                    Today
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        class="dw-btn dw-btn-secondary"
+                                        onclick="openFolder('Web Development')">
+
+                                        Open
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <i
+                                        class="fa-solid fa-folder"
+                                        style="
+                                            color:#a78bfa;
+                                            margin-right:8px;
+                                        ">
+                                    </i>
+
+                                    Python
+
+                                </td>
+
+                                <td>
+                                    Folder
+                                </td>
+
+                                <td>
+                                    3 projects
+                                </td>
+
+                                <td>
+                                    Yesterday
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        class="dw-btn dw-btn-secondary"
+                                        onclick="openFolder('Python')">
+
+                                        Open
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <i
+                                        class="fa-solid fa-folder"
+                                        style="
+                                            color:#a78bfa;
+                                            margin-right:8px;
+                                        ">
+                                    </i>
+
+                                    Java
+
+                                </td>
+
+                                <td>
+                                    Folder
+                                </td>
+
+                                <td>
+                                    2 projects
+                                </td>
+
+                                <td>
+                                    2 days ago
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        class="dw-btn dw-btn-secondary"
+                                        onclick="openFolder('Java')">
+
+                                        Open
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+                                    <i
+                                        class="fa-solid fa-folder"
+                                        style="
+                                            color:#a78bfa;
+                                            margin-right:8px;
+                                        ">
+                                    </i>
+
+                                    PHP
+
+                                </td>
+
+                                <td>
+                                    Folder
+                                </td>
+
+                                <td>
+                                    4 projects
+                                </td>
+
+                                <td>
+                                    4 days ago
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        class="dw-btn dw-btn-secondary"
+                                        onclick="openFolder('PHP')">
+
+                                        Open
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /*
+     * USERNAME
+     */
+
+    const loggedInUsername =
+        {{ (current_user.username if current_user.is_authenticated and current_user.username else 'User') | tojson }};
+
+
+    document.getElementById(
+        "sidebarUsername"
+    ).textContent =
+        loggedInUsername;
+
+
+    document.getElementById(
+        "topUsername"
+    ).textContent =
+        loggedInUsername;
+
+
+    const initial =
+        loggedInUsername
+            .trim()
+            .charAt(0)
+            .toUpperCase() || "U";
+
+
+    document.getElementById(
+        "sidebarAvatar"
+    ).textContent =
+        initial;
+
+
+    document.getElementById(
+        "topAvatar"
+    ).textContent =
+        initial;
+
+
+    /*
+     * MOBILE SIDEBAR
+     */
+
+    const sidebar =
+        document.getElementById(
+            "dwSidebar"
+        );
+
+    const overlay =
+        document.getElementById(
+            "dwOverlay"
+        );
+
+    const mobileToggle =
+        document.getElementById(
+            "dwMobileToggle"
+        );
+
+
+    mobileToggle.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.add(
+                "open"
+            );
+
+            overlay.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+    overlay.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            overlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    /*
+     * FOLDER ACTIONS
+     */
+
+    function openFolder(folderName) {
+
+        dwToast(
+            "Opening " +
+            folderName +
+            "..."
+        );
+
+    }
+
+
+    function createFolder() {
+
+        dwToast(
+            "New folder creation opened"
+        );
+
+    }
+
+
+    function refreshExplorer() {
+
+        dwToast(
+            "Workspace refreshed"
+        );
+
+    }
+
+
+    /*
+     * SIMPLE TOAST
+     */
+
+    function dwToast(message) {
+
+        let toast =
+            document.getElementById(
+                "dwToast"
+            );
+
+
+        if (!toast) {
+
+            toast =
+                document.createElement(
+                    "div"
+                );
+
+            toast.id =
+                "dwToast";
+
+
+            toast.style.position =
+                "fixed";
+
+            toast.style.right =
+                "22px";
+
+            toast.style.bottom =
+                "22px";
+
+            toast.style.zIndex =
+                "9999";
+
+            toast.style.padding =
+                "12px 15px";
+
+            toast.style.borderRadius =
+                "10px";
+
+            toast.style.background =
+                "#111923";
+
+            toast.style.border =
+                "1px solid rgba(139,92,246,.25)";
+
+            toast.style.color =
+                "#cbd5e1";
+
+            toast.style.fontSize =
+                "11px";
+
+            toast.style.boxShadow =
+                "0 15px 40px rgba(0,0,0,.35)";
+
+
+            document.body.appendChild(
+                toast
+            );
+
+        }
+
+
+        toast.innerHTML =
+            '<i class="fa-solid fa-circle-check" ' +
+            'style="color:#4ade80;margin-right:7px"></i>' +
+            message;
+
+
+        toast.style.display =
+            "block";
+
+
+        clearTimeout(
+            window.dwToastTimer
+        );
+
+
+        window.dwToastTimer =
+            setTimeout(
+                function () {
+
+                    toast.style.display =
+                        "none";
+
+                },
+                2400
+            );
+
+    }
+
+</script>
+
+{% endblock %}
+```

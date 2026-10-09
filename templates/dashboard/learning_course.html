@@ -1,0 +1,10 @@
+{% extends "base_auth.html" %}
+{% set active_page='courses' %}
+{% block content %}
+{% include "partials/user_shell.html" %}
+{% block desktop_content %}
+<div class="dw-page-head"><div><h1>{{ course.title }}</h1><p>{{ course.language.name }} · {{ course.level|title }}</p></div><a class="dw-btn dw-btn-outline" href="{{ url_for('learning.language_detail',slug=course.language.slug) }}">Back to Language</a></div>
+<div class="dw-panel mb-4"><div class="dw-panel-body"><p style="margin:0;color:#94a3b8;font-size:.7rem;line-height:1.7">{{ course.description or 'No course description available.' }}</p></div></div>
+<div class="dw-panel"><div class="dw-panel-head"><span class="dw-panel-title">Course Outline</span></div><div class="dw-panel-body">{% for chapter in course.chapters %}<div class="dw-list-item"><div class="dw-list-icon"><i class="fa-solid fa-layer-group"></i></div><div class="dw-list-main"><div class="dw-list-title">{{ chapter.order_no }}. {{ chapter.title }}</div><div class="dw-list-meta">{{ chapter.lessons|length }} lesson(s)</div>{% for lesson in chapter.lessons %}<a href="{{ url_for('learning.lesson_detail',lesson_id=lesson.id) }}" class="d-block mt-2" style="color:#a78bfa;font-size:.61rem">{{ lesson.order_no }}. {{ lesson.title }} <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>{% endfor %}</div></div>{% else %}<div class="dw-empty">No published chapters yet.</div>{% endfor %}</div></div>
+{% endblock %}
+{% endblock %}

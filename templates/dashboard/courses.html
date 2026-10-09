@@ -1,0 +1,22 @@
+{% extends "base_auth.html" %}
+{% set active_page='courses' %}
+{% block content %}
+{% include "partials/user_shell.html" %}
+{% block desktop_content %}
+<div class="dw-page-head"><div><h1>Courses</h1><p>Courses published by the administrator are available here for learning.</p></div></div>
+<div class="dw-grid-3">
+{% for course in published_courses %}
+<a class="dw-card" href="{{ url_for('learning.course_detail', course_id=course.id) }}">
+  <div class="dw-card-icon"><i class="{{ course.language.icon if course.language else 'fa-solid fa-book-open' }}"></i></div>
+  <h3>{{ course.title }}</h3>
+  <p>{{ course.language.name if course.language else 'Course' }} · {{ course.level|title }}</p>
+  <div class="d-flex justify-content-between mt-3"><span style="font-size:.58rem;color:#64748b">Chapters</span><span style="font-size:.58rem;color:#a78bfa">{{ course.chapters|length }}</span></div>
+  <div class="d-flex justify-content-between mt-1"><span style="font-size:.58rem;color:#64748b">Lessons</span><span style="font-size:.58rem;color:#a78bfa">{% set lc=namespace(v=0) %}{% for ch in course.chapters %}{% set lc.v=lc.v+ch.lessons|length %}{% endfor %}{{ lc.v }}</span></div>
+  <span class="dw-btn dw-btn-outline w-100 mt-3 d-inline-flex justify-content-center">Open Course</span>
+</a>
+{% else %}
+<div class="dw-panel" style="grid-column:1/-1"><div class="dw-empty"><i class="fa-solid fa-book-open"></i><h3>No published courses yet</h3><p>Ask the administrator to publish course content or import a Word course.</p></div></div>
+{% endfor %}
+</div>
+{% endblock %}
+{% endblock %}

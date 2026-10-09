@@ -1,0 +1,4 @@
+{% extends "admin/base.html" %}{% set active_admin_page='reports' %}{% block admin_breadcrumb %}Projects{% endblock %}{% block admin_content %}
+<div class="ad-heading"><div><h1>Projects</h1><p>View project records across the local DevWorkspace database.</p></div></div>
+<div class="ad-card"><div class="ad-table-wrap"><table class="ad-table"><thead><tr><th>ID</th><th>Name</th><th>Owner</th><th>Status</th><th>Action</th></tr></thead><tbody>{% for p in projects %}<tr><td>#{{ p.id }}</td><td><strong>{{ p.name }}</strong></td><td>{{ p.owner }}</td><td><span class="ad-badge green">{{ p.status }}</span></td><td><form method="POST" action="{{ url_for('admin.delete_project',project_id=p.id) }}" onsubmit="return confirm('Delete this project?')"><button class="ad-chip" style="color:#fca5a5">Delete</button></form></td></tr>{% else %}<tr><td colspan="5"><div class="ad-empty">No projects found.</div></td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

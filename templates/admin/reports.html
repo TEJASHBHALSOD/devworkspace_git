@@ -1,0 +1,8 @@
+{% extends "admin/base.html" %}
+{% set active_admin_page='reports' %}
+{% block admin_breadcrumb %}Reports{% endblock %}
+{% block admin_content %}
+<div class="ad-heading"><div><h1>Content & Usage Report</h1><p>Counts for registered users and learning content. Administrator accounts are intentionally excluded from the user count.</p></div></div>
+<div class="ad-grid4">{% for label,value,icon in [('Registered Users',users,'fa-users'),('Languages',languages,'fa-code'),('Courses',courses,'fa-book-open'),('Chapters',chapters,'fa-list-ol'),('Lessons',lessons,'fa-file-lines'),('Code Examples',examples,'fa-code'),('Exercises',exercises,'fa-flask'),('Quizzes',quizzes,'fa-circle-question'),('Project Templates',templates,'fa-folder-tree'),('Projects',projects,'fa-diagram-project')] %}<div class="ad-stat"><div class="ad-stat-icon"><i class="fa-solid {{ icon }}"></i></div><div class="ad-stat-value">{{ value }}</div><div class="ad-stat-label">{{ label }}</div></div>{% endfor %}</div>
+<div class="ad-card mt-4"><div class="ad-head"><span class="ad-title">Learning Structure</span></div><div class="ad-body"><div class="ad-grid4"><div><span class="ad-label">1</span><strong style="font-size:.7rem">Language</strong></div><div><span class="ad-label">2</span><strong style="font-size:.7rem">Course</strong></div><div><span class="ad-label">3</span><strong style="font-size:.7rem">Chapter</strong></div><div><span class="ad-label">4</span><strong style="font-size:.7rem">Lesson → Example / Exercise / Quiz</strong></div></div></div></div>
+{% endblock %}

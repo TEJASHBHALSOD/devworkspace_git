@@ -1,0 +1,39 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+    <main style="padding-top: calc(var(--navbar-height) + 2rem);">
+    <section class="py-5 text-center bg-surface-secondary border-bottom">
+      <div class="container">
+        <span class="section-tag">Legal Documentation</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">Terms &amp; Conditions</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 720px;">
+          Please review the terms of service governing DevWorkspace platform usage.
+        </p>
+      </div>
+    </section>
+
+    <section class="public-section">
+      <div class="container" style="max-width: 860px;">
+        <div class="app-card p-4 p-md-5">
+          <h2 class="h4 fw-bold text-dark mb-3">1. Acceptance of Terms</h2>
+          <p class="text-secondary">By creating an account or accessing DevWorkspace, you agree to comply with these terms, academic guidelines, and applicable laws.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">2. Account Responsibilities</h2>
+          <p class="text-secondary">Users are responsible for safeguarding login credentials and maintaining the accuracy of registered information.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">3. Learning Content &amp; Intellectual Property</h2>
+          <p class="text-secondary">All pedagogical courses, lesson explanations, practice problems, and quiz question banks remain the proprietary curriculum of DevWorkspace. Students are granted a personal, non-exclusive license to study the materials.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">4. Code Workspace Usage &amp; Prohibited Conduct</h2>
+          <p class="text-secondary">The code workspace is provided strictly for educational scripting, project development, and coursework exercises. Users may not attempt to execute malicious code, denial of service actions, or unauthorized system penetration.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">5. Backup &amp; Data Disclaimer</h2>
+          <p class="text-secondary">While DevWorkspace provides snapshot backup tools, users are encouraged to maintain external backups of critical project assignments.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">6. Changes to Terms</h2>
+          <p class="text-secondary mb-0">We may update these terms as new platform capabilities, backend connections, and cloud integrations roll out. Continued use constitutes acceptance.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock  %}

@@ -1,0 +1,21 @@
+{% extends "base_auth.html" %}
+{% set active_page='languages' %}
+{% block content %}
+{% include "partials/user_shell.html" %}
+{% block desktop_content %}
+<div class="dw-page-head"><div><h1>Languages</h1><p>Languages published by the administrator are available here.</p></div></div>
+<div class="dw-grid-4">
+{% for language in published_languages %}
+<a class="dw-card" href="{{ url_for('learning.language_detail', slug=language.slug) }}">
+  <div class="dw-card-icon"><i class="{{ language.icon }}"></i></div>
+  <h3>{{ language.name }}</h3>
+  <p>{{ language.description or 'Start learning this language in DevWorkspace.' }}</p>
+  <div class="d-flex justify-content-between mt-3"><span style="font-size:.58rem;color:#64748b">Version</span><span style="font-size:.58rem;color:#a78bfa">{{ language.version }}</span></div>
+  <div class="d-flex justify-content-between mt-1"><span style="font-size:.58rem;color:#64748b">Courses</span><span style="font-size:.58rem;color:#a78bfa">{{ language.courses|selectattr('status','equalto','published')|list|length }}</span></div>
+</a>
+{% else %}
+<div class="dw-panel" style="grid-column:1/-1"><div class="dw-empty"><i class="fa-solid fa-laptop-code"></i><h3>No published languages yet</h3><p>When an administrator publishes a language, it will appear here automatically.</p></div></div>
+{% endfor %}
+</div>
+{% endblock %}
+{% endblock %}

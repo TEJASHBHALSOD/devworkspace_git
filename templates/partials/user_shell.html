@@ -1,0 +1,1198 @@
+<!-- =========================================================
+     DevWorkspace User Shell
+     File:
+     templates/partials/user_shell.html
+     ========================================================= -->
+
+<style>
+
+    :root {
+        --dw-bg: #070b14;
+        --dw-sidebar: #0b1020;
+        --dw-border: rgba(255,255,255,.08);
+
+        --dw-text: #f1f5f9;
+        --dw-muted: #94a3b8;
+
+        --dw-primary: #818cf8;
+        --dw-purple: #a855f7;
+
+        --dw-sidebar-width: 250px;
+        --dw-header-height: 68px;
+    }
+
+
+    /* ================================
+       APP
+       ================================ */
+
+    .dw-app {
+        min-height: 100vh;
+        background:
+            radial-gradient(
+                ellipse 60% 45% at 10% 0%,
+                rgba(99,102,241,.10),
+                transparent 60%
+            ),
+            radial-gradient(
+                ellipse 55% 40% at 100% 100%,
+                rgba(168,85,247,.07),
+                transparent 60%
+            ),
+            var(--dw-bg);
+
+        color: var(--dw-text);
+    }
+
+
+    /* ================================
+       SIDEBAR
+       ================================ */
+
+    .dw-sidebar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        width: var(--dw-sidebar-width);
+
+        background:
+            linear-gradient(
+                180deg,
+                #0b1020,
+                #070b14
+            );
+
+        border-right: 1px solid var(--dw-border);
+
+        display: flex;
+        flex-direction: column;
+
+        z-index: 1050;
+
+        transition: transform .25s ease;
+    }
+
+
+    /* ================================
+       BRAND
+       ================================ */
+
+    .dw-brand {
+        height: var(--dw-header-height);
+
+        display: flex;
+        align-items: center;
+
+        padding: 0 18px;
+
+        color: white;
+        text-decoration: none;
+
+        border-bottom: 1px solid var(--dw-border);
+    }
+
+
+    .dw-brand:hover {
+        color: white;
+    }
+
+
+    .dw-brand-icon {
+        width: 36px;
+        height: 36px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #6366f1,
+                #a855f7
+            );
+
+        box-shadow:
+            0 8px 22px rgba(99,102,241,.3);
+    }
+
+
+    .dw-brand-name {
+        margin-left: 11px;
+
+        font-size: 1rem;
+        font-weight: 700;
+
+        letter-spacing: -.02em;
+    }
+
+
+    .dw-brand-name span {
+        color: #a78bfa;
+    }
+
+
+    /* ================================
+       SIDEBAR NAV
+       ================================ */
+
+    .dw-sidebar-content {
+        flex: 1;
+
+        overflow-y: auto;
+
+        padding: 18px 12px;
+    }
+
+
+    .dw-sidebar-label {
+        margin: 0 9px 8px;
+
+        color: #475569;
+
+        font-size: .65rem;
+
+        font-weight: 700;
+
+        letter-spacing: .12em;
+
+        text-transform: uppercase;
+    }
+
+
+    .dw-sidebar-section {
+        margin-bottom: 22px;
+    }
+
+
+    .dw-nav {
+        display: flex;
+        flex-direction: column;
+
+        gap: 3px;
+    }
+
+
+    .dw-nav-link {
+        min-height: 42px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 0 11px;
+
+        border-radius: 9px;
+
+        color: #94a3b8;
+
+        text-decoration: none;
+
+        font-size: .84rem;
+
+        transition:
+            background .18s ease,
+            color .18s ease,
+            transform .18s ease;
+    }
+
+
+    .dw-nav-link i {
+        width: 21px;
+
+        margin-right: 10px;
+
+        text-align: center;
+
+        color: #64748b;
+    }
+
+
+    .dw-nav-link:hover {
+        color: #f1f5f9;
+
+        background: rgba(255,255,255,.045);
+
+        transform: translateX(2px);
+    }
+
+
+    .dw-nav-link:hover i {
+        color: #a5b4fc;
+    }
+
+
+    .dw-nav-link.active {
+        color: white;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(99,102,241,.17),
+                rgba(168,85,247,.06)
+            );
+
+        box-shadow:
+            inset 0 0 0 1px rgba(129,140,248,.08);
+    }
+
+
+    .dw-nav-link.active i {
+        color: #a5b4fc;
+    }
+
+
+    .dw-nav-link.active::before {
+        content: "";
+
+        width: 3px;
+
+        height: 22px;
+
+        margin-left: -11px;
+        margin-right: 8px;
+
+        border-radius: 0 4px 4px 0;
+
+        background:
+            linear-gradient(
+                180deg,
+                #818cf8,
+                #a855f7
+            );
+    }
+
+
+    /* ================================
+       SIDEBAR USER
+       ================================ */
+
+    .dw-sidebar-bottom {
+        padding: 12px;
+
+        border-top: 1px solid var(--dw-border);
+    }
+
+
+    .dw-sidebar-user {
+        display: flex;
+        align-items: center;
+
+        padding: 9px;
+
+        border-radius: 10px;
+
+        background: rgba(255,255,255,.025);
+
+        border: 1px solid rgba(255,255,255,.045);
+    }
+
+
+    .dw-user-avatar {
+        width: 34px;
+        height: 34px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 9px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #6366f1,
+                #a855f7
+            );
+
+        color: white;
+
+        font-size: .75rem;
+
+        font-weight: 700;
+    }
+
+
+    .dw-user-info {
+        margin-left: 9px;
+
+        min-width: 0;
+    }
+
+
+    .dw-user-name {
+        color: #e2e8f0;
+
+        font-size: .78rem;
+
+        font-weight: 600;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
+    .dw-user-role {
+        margin-top: 2px;
+
+        color: #64748b;
+
+        font-size: .67rem;
+    }
+
+
+    /* ================================
+       MAIN
+       ================================ */
+
+    .dw-main {
+        min-height: 100vh;
+
+        margin-left: var(--dw-sidebar-width);
+    }
+
+
+    /* ================================
+       TOPBAR
+       ================================ */
+
+    .dw-topbar {
+        position: sticky;
+
+        top: 0;
+
+        height: var(--dw-header-height);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 26px;
+
+        background:
+            rgba(7,11,20,.82);
+
+        border-bottom: 1px solid var(--dw-border);
+
+        backdrop-filter: blur(18px);
+
+        z-index: 900;
+    }
+
+
+    .dw-topbar-left,
+    .dw-topbar-right {
+        display: flex;
+
+        align-items: center;
+    }
+
+
+    .dw-breadcrumb {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        color: #64748b;
+
+        font-size: .78rem;
+    }
+
+
+    .dw-breadcrumb i {
+        font-size: .55rem;
+
+        color: #475569;
+    }
+
+
+    .dw-breadcrumb-current {
+        color: #cbd5e1;
+
+        font-weight: 600;
+    }
+
+
+    /* ================================
+       TOP ACTIONS
+       ================================ */
+
+    .dw-top-action {
+        width: 37px;
+        height: 37px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-left: 7px;
+
+        border: 1px solid var(--dw-border);
+
+        border-radius: 9px;
+
+        background: rgba(255,255,255,.025);
+
+        color: #94a3b8;
+
+        text-decoration: none;
+
+        transition:
+            background .18s ease,
+            color .18s ease;
+    }
+
+
+    .dw-top-action:hover {
+        color: white;
+
+        background: rgba(255,255,255,.06);
+    }
+
+
+    .dw-top-divider {
+        width: 1px;
+        height: 25px;
+
+        margin: 0 10px;
+
+        background: var(--dw-border);
+    }
+
+
+    /* ================================
+       PROFILE
+       ================================ */
+
+    .dw-profile {
+        position: relative;
+    }
+
+
+    .dw-profile-button {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 4px 7px 4px 4px;
+
+        border: 1px solid transparent;
+
+        border-radius: 10px;
+
+        background: transparent;
+
+        color: #cbd5e1;
+
+        cursor: pointer;
+    }
+
+
+    .dw-profile-button:hover {
+        background: rgba(255,255,255,.045);
+
+        border-color: var(--dw-border);
+    }
+
+
+    .dw-profile-avatar {
+        width: 32px;
+        height: 32px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 8px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #6366f1,
+                #a855f7
+            );
+
+        color: white;
+
+        font-size: .75rem;
+
+        font-weight: 700;
+    }
+
+
+    .dw-profile-name {
+        max-width: 100px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        font-size: .76rem;
+        font-weight: 600;
+    }
+
+
+    .dw-profile-chevron {
+        font-size: .6rem;
+
+        color: #64748b;
+    }
+
+
+    /* ================================
+       PROFILE MENU
+       ================================ */
+
+    .dw-profile-menu {
+        position: absolute;
+
+        right: 0;
+        top: calc(100% + 8px);
+
+        width: 185px;
+
+        padding: 7px;
+
+        border: 1px solid rgba(255,255,255,.09);
+
+        border-radius: 12px;
+
+        background: #0f172a;
+
+        box-shadow:
+            0 20px 50px rgba(0,0,0,.45);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform: translateY(-5px);
+
+        transition: .18s ease;
+
+        z-index: 1200;
+    }
+
+
+    .dw-profile.open .dw-profile-menu {
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: translateY(0);
+    }
+
+
+    .dw-profile-menu-item {
+        min-height: 38px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 0 10px;
+
+        border-radius: 8px;
+
+        color: #94a3b8;
+
+        text-decoration: none;
+
+        font-size: .77rem;
+    }
+
+
+    .dw-profile-menu-item:hover {
+        color: white;
+
+        background: rgba(255,255,255,.055);
+    }
+
+
+    .dw-profile-menu-item i {
+        width: 16px;
+
+        text-align: center;
+    }
+
+
+    .dw-profile-menu-divider {
+        height: 1px;
+
+        margin: 6px 3px;
+
+        background: rgba(255,255,255,.07);
+    }
+
+
+    .dw-profile-menu-item.logout {
+        color: #f87171;
+    }
+
+
+    /* ================================
+       MOBILE MENU
+       ================================ */
+
+    .dw-mobile-menu {
+        width: 37px;
+        height: 37px;
+
+        display: none;
+
+        align-items: center;
+        justify-content: center;
+
+        margin-right: 10px;
+
+        border: 1px solid var(--dw-border);
+
+        border-radius: 9px;
+
+        background: rgba(255,255,255,.035);
+
+        color: #94a3b8;
+    }
+
+
+    /* ================================
+       MOBILE OVERLAY
+       ================================ */
+
+    .dw-sidebar-overlay {
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(0,0,0,.55);
+
+        z-index: 1040;
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: .25s ease;
+    }
+
+
+    .dw-sidebar-overlay.active {
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+
+    /* ================================
+       PAGE AREA
+       ================================ */
+
+    .dw-page-content {
+        padding: 28px;
+    }
+
+
+    /* ================================
+       CUSTOM SCROLLBAR
+       ================================ */
+
+    .dw-app {
+        scrollbar-width: thin;
+
+        scrollbar-color:
+            rgba(129,140,248,.5)
+            rgba(255,255,255,.025);
+    }
+
+
+    .dw-app::-webkit-scrollbar,
+    .dw-sidebar-content::-webkit-scrollbar {
+        width: 7px;
+    }
+
+
+    .dw-app::-webkit-scrollbar-track,
+    .dw-sidebar-content::-webkit-scrollbar-track {
+        background: rgba(255,255,255,.018);
+    }
+
+
+    .dw-app::-webkit-scrollbar-thumb,
+    .dw-sidebar-content::-webkit-scrollbar-thumb {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(129,140,248,.6),
+                rgba(168,85,247,.45)
+            );
+
+        border-radius: 20px;
+    }
+
+
+    .dw-app::-webkit-scrollbar-thumb:hover,
+    .dw-sidebar-content::-webkit-scrollbar-thumb:hover {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(129,140,248,.85),
+                rgba(168,85,247,.7)
+            );
+    }
+
+
+    /* ================================
+       RESPONSIVE
+       ================================ */
+
+    @media (max-width: 900px) {
+
+        .dw-sidebar {
+            transform: translateX(-100%);
+        }
+
+
+        .dw-sidebar.mobile-open {
+            transform: translateX(0);
+        }
+
+
+        .dw-main {
+            margin-left: 0;
+        }
+
+
+        .dw-mobile-menu {
+            display: flex;
+        }
+
+
+        .dw-topbar {
+            padding: 0 18px;
+        }
+
+
+        .dw-page-content {
+            padding: 20px;
+        }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+        .dw-topbar {
+            padding: 0 13px;
+        }
+
+
+        .dw-profile-name,
+        .dw-profile-chevron,
+        .dw-top-divider {
+            display: none;
+        }
+
+
+        .dw-page-content {
+            padding: 16px;
+        }
+
+    }
+
+</style>
+
+
+<!-- =========================================================
+     DEVWORKSPACE APPLICATION
+     ========================================================= -->
+
+<div class="dw-app">
+
+
+    <!-- MOBILE OVERLAY -->
+
+    <div
+        class="dw-sidebar-overlay"
+        id="dwSidebarOverlay"
+        onclick="closeDevWorkspaceSidebar()">
+    </div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside
+        class="dw-sidebar"
+        id="dwSidebar"
+    >
+
+
+        <!-- BRAND -->
+
+        <a
+            href="{{ url_for('dashboard.index') }}"
+            class="dw-brand"
+        >
+
+            <div class="dw-brand-icon">
+                <i class="fa-solid fa-code"></i>
+            </div>
+
+            <div class="dw-brand-name">
+                Dev<span>Workspace</span>
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="dw-sidebar-content">
+
+
+            <!-- WORKSPACE -->
+
+            <div class="dw-sidebar-section">
+
+                <div class="dw-sidebar-label">
+                    Workspace
+                </div>
+
+
+                <nav class="dw-nav">
+
+                    <a
+                        href="{{ url_for('dashboard.index') }}"
+                        class="dw-nav-link {% if active_page == 'dashboard' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('dashboard.projects') }}"
+                        class="dw-nav-link {% if active_page == 'projects' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-folder"></i>
+                        Projects
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('dashboard.workspace') }}"
+                        class="dw-nav-link {% if active_page == 'workspace' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-laptop-code"></i>
+                        Workspace
+                    </a>
+
+
+                    <a
+                        href="/editor"
+                        class="dw-nav-link {% if active_page == 'editor' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-code"></i>
+                        Code Editor
+                    </a>
+
+                </nav>
+
+            </div>
+
+
+            <!-- LEARNING -->
+
+            <div class="dw-sidebar-section">
+
+                <div class="dw-sidebar-label">
+                    Learning
+                </div>
+
+
+                <nav class="dw-nav">
+
+                    <a
+                        href="/courses"
+                        class="dw-nav-link {% if active_page == 'courses' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        Courses
+                    </a>
+
+
+                    <a
+                        href="/languages"
+                        class="dw-nav-link {% if active_page == 'languages' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-layer-group"></i>
+                        Languages
+                    </a>
+
+
+                    <a
+                        href="/progress"
+                        class="dw-nav-link {% if active_page == 'progress' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-chart-line"></i>
+                        Progress
+                    </a>
+
+                </nav>
+
+            </div>
+
+
+            <!-- MANAGEMENT -->
+
+            <div class="dw-sidebar-section">
+
+                <div class="dw-sidebar-label">
+                    Manage
+                </div>
+
+
+                <nav class="dw-nav">
+
+                    <a
+                        href="/files"
+                        class="dw-nav-link {% if active_page == 'files' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-file"></i>
+                        My Files
+                    </a>
+
+
+                    <a
+                        href="/backups"
+                        class="dw-nav-link {% if active_page == 'backups' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-box-archive"></i>
+                        Backups
+                    </a>
+
+
+                    <a
+                        href="/settings"
+                        class="dw-nav-link {% if active_page == 'settings' %}active{% endif %}"
+                    >
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="dw-sidebar-bottom">
+
+            <div class="dw-sidebar-user">
+
+                <div
+                    class="dw-user-avatar"
+                    id="dwSidebarAvatar"
+                >
+                    U
+                </div>
+
+
+                <div class="dw-user-info">
+
+                    <div
+                        class="dw-user-name"
+                        id="dwSidebarUserName"
+                    >
+                        User
+                    </div>
+
+                    <div class="dw-user-role">
+                        Developer
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="dw-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="dw-topbar">
+
+
+            <div class="dw-topbar-left">
+
+                <button
+                    type="button"
+                    class="dw-mobile-menu"
+                    onclick="toggleDevWorkspaceSidebar()"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+
+                <div class="dw-breadcrumb">
+
+                    <span>
+                        DevWorkspace
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                    <span class="dw-breadcrumb-current">
+
+                        {% if active_page == 'dashboard' %}
+                            Dashboard
+                        {% elif active_page == 'projects' %}
+                            Projects
+                        {% elif active_page == 'workspace' %}
+                            Workspace
+                        {% elif active_page == 'editor' %}
+                            Code Editor
+                        {% elif active_page == 'courses' %}
+                            Courses
+                        {% elif active_page == 'languages' %}
+                            Languages
+                        {% elif active_page == 'progress' %}
+                            Progress
+                        {% elif active_page == 'files' %}
+                            My Files
+                        {% elif active_page == 'backups' %}
+                            Backups
+                        {% elif active_page == 'settings' %}
+                            Settings
+                        {% else %}
+                            Dashboard
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="dw-topbar-right">
+
+
+                <a
+                    href="/search"
+                    class="dw-top-action"
+                    title="Search"
+                >
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+
+
+                <a
+                    href="/notifications"
+                    class="dw-top-action"
+                    title="Notifications"
+                >
+                    <i class="fa-regular fa-bell"></i>
+                </a>
+
+
+                <div class="dw-top-divider"></div>
+
+
+                <div
+                    class="dw-profile"
+                    id="dwProfile"
+                >
+
+                    <button
+                        type="button"
+                        class="dw-profile-button"
+                        onclick="toggleDevWorkspaceProfile()"
+                    >
+
+                        <div
+                            class="dw-profile-avatar"
+                            id="dwProfileAvatar"
+                        >
+                            U
+                        </div>
+
+
+                        <span
+                            class="dw-profile-name"
+                            id="dwProfileName"
+                        >
+                            User
+                        </span>
+
+
+                        <i class="fa-solid fa-chevron-down dw-profile-chevron"></i>
+
+                    </button>
+
+
+                    <div class="dw-profile-menu">
+
+
+                        <a
+                            href="/profile"
+                            class="dw-profile-menu-item"
+                        >
+                            <i class="fa-regular fa-user"></i>
+                            My Profile
+                        </a>
+
+
+                        <a
+                            href="/settings"
+                            class="dw-profile-menu-item"
+                        >
+                            <i class="fa-solid fa-gear"></i>
+                            Settings
+                        </a>
+
+
+                        <div class="dw-profile-menu-divider"></div>
+
+
+                        <a
+                            href="{{ url_for('auth.logout') }}"
+                            class="dw-profile-menu-item logout"
+                        >
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+
+        <div class="dw-page-content">

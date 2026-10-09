@@ -1,0 +1,106 @@
+<!-- templates/admin/project_details.html -->
+
+{% extends "base_auth.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <a href="{{ url_for('admin.projects') }}"
+       class="btn btn-light mb-4">
+
+        <i class="fa-solid fa-arrow-left me-1"></i>
+        Projects
+
+    </a>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+
+                    <h2 class="fw-bold">
+                        {{ project.name }}
+                    </h2>
+
+                    <p class="text-secondary">
+                        Project ID #{{ project.id }}
+                    </p>
+
+                </div>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('admin.delete_project', project_id=project.id) }}"
+                    onsubmit="return confirm('Delete this project permanently?');"
+                >
+
+                    <button class="btn btn-danger">
+
+                        <i class="fa-solid fa-trash me-1"></i>
+                        Delete
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <hr>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        Project Name
+                    </small>
+
+                    <div class="fw-semibold">
+                        {{ project.name }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        Project ID
+                    </small>
+
+                    <div class="fw-semibold">
+                        #{{ project.id }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <small class="text-secondary">
+                        Owner
+                    </small>
+
+                    <div class="fw-semibold">
+
+                        {% if project.user %}
+                            {{ project.user.username }}
+                        {% else %}
+                            -
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

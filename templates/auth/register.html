@@ -1,0 +1,1214 @@
+{% extends "base_auth.html" %}
+
+{% block content %}
+
+<style>
+/* =========================================================
+   DEVWORKSPACE AUTH — REGISTER
+   ========================================================= */
+
+:root {
+    --dw-bg: #080b12;
+    --dw-card: #0e141d;
+    --dw-border: rgba(255,255,255,.09);
+
+    --dw-purple: #8b5cf6;
+    --dw-indigo: #6366f1;
+    --dw-cyan: #22d3ee;
+
+    --dw-text: #f8fafc;
+    --dw-muted: #94a3b8;
+}
+
+/* PAGE */
+
+.dw-register-page {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at 15% 10%, rgba(99,102,241,.15), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(34,211,238,.08), transparent 30%),
+        var(--dw-bg);
+
+    color: var(--dw-text);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.dw-register-page::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+
+    background-size: 55px 55px;
+
+    pointer-events: none;
+}
+
+/* CONTAINER */
+
+.dw-register-container {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    z-index: 2;
+
+    padding: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.dw-register-card {
+
+    width: min(1050px, 100%);
+
+    display: grid;
+
+    grid-template-columns: .82fr 1.18fr;
+
+    background: rgba(14,20,29,.92);
+
+    border: 1px solid var(--dw-border);
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.48),
+        0 0 70px rgba(99,102,241,.06);
+}
+
+/* =========================================================
+   LEFT
+   ========================================================= */
+
+.dw-register-info {
+
+    padding: 48px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(99,102,241,.13),
+            transparent 45%
+        ),
+        #0b1018;
+
+    border-right: 1px solid var(--dw-border);
+}
+
+.dw-register-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    color: white;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.dw-register-brand-icon {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dw-indigo),
+            var(--dw-purple)
+        );
+}
+
+.dw-register-brand span {
+
+    color: #a78bfa;
+}
+
+.dw-register-message {
+
+    margin: auto 0;
+
+    padding: 50px 0;
+}
+
+.dw-register-message .small-title {
+
+    color: #a5b4fc;
+
+    font-size: .7rem;
+
+    font-weight: 700;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+
+    margin-bottom: 18px;
+}
+
+.dw-register-message h1 {
+
+    font-size: 2.9rem;
+
+    line-height: 1.05;
+
+    letter-spacing: -.05em;
+
+    font-weight: 750;
+
+    margin-bottom: 18px;
+}
+
+.dw-register-gradient {
+
+    background:
+        linear-gradient(
+            100deg,
+            #a78bfa,
+            #67e8f9
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+.dw-register-message p {
+
+    color: var(--dw-muted);
+
+    font-size: .86rem;
+
+    line-height: 1.75;
+
+    max-width: 350px;
+}
+
+/* BENEFITS */
+
+.dw-benefits {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+.dw-benefit {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #94a3b8;
+
+    font-size: .76rem;
+}
+
+.dw-benefit-icon {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: rgba(139,92,246,.1);
+
+    color: #a78bfa;
+}
+
+/* =========================================================
+   RIGHT FORM
+   ========================================================= */
+
+.dw-register-form {
+
+    padding: 48px 55px;
+
+    background: #0e141d;
+}
+
+.dw-register-heading {
+
+    margin-bottom: 27px;
+}
+
+.dw-register-heading h2 {
+
+    font-size: 1.75rem;
+
+    letter-spacing: -.035em;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+.dw-register-heading p {
+
+    margin: 0;
+
+    color: var(--dw-muted);
+
+    font-size: .82rem;
+}
+
+/* FORM */
+
+.dw-reg-field {
+
+    margin-bottom: 17px;
+}
+
+.dw-reg-label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #cbd5e1;
+
+    font-size: .74rem;
+
+    font-weight: 600;
+}
+
+.dw-reg-input-wrap {
+
+    position: relative;
+}
+
+.dw-reg-icon {
+
+    position: absolute;
+
+    left: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #475569;
+
+    pointer-events: none;
+
+    transition: color .2s;
+}
+
+.dw-reg-input {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 42px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: #0a1018 !important;
+
+    color: white !important;
+
+    font-size: .8rem;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+.dw-reg-input::placeholder {
+
+    color: #475569;
+}
+
+.dw-reg-input:focus {
+
+    border-color: rgba(139,92,246,.72);
+
+    box-shadow:
+        0 0 0 3px rgba(139,92,246,.1);
+
+    background: #0d131c !important;
+}
+
+.dw-reg-input-wrap:focus-within .dw-reg-icon {
+
+    color: #a78bfa;
+}
+
+/* PASSWORD TOGGLE */
+
+.dw-reg-toggle {
+
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background: transparent;
+
+    border: 0;
+
+    color: #475569;
+
+    cursor: pointer;
+
+    padding: 5px;
+}
+
+.dw-reg-toggle:hover {
+
+    color: #cbd5e1;
+}
+
+/* STRENGTH */
+
+.dw-strength {
+
+    margin-top: 8px;
+}
+
+.dw-strength-track {
+
+    height: 3px;
+
+    width: 100%;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background: #1e293b;
+}
+
+.dw-strength-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    transition:
+        width .25s ease,
+        background .25s ease;
+}
+
+.dw-strength-text {
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: .66rem;
+}
+
+/* TERMS */
+
+.dw-terms {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin: 20px 0 23px;
+
+    color: #64748b;
+
+    font-size: .7rem;
+
+    line-height: 1.6;
+}
+
+.dw-terms input {
+
+    margin-top: 2px;
+
+    width: 15px;
+    height: 15px;
+
+    accent-color: var(--dw-purple);
+
+    flex-shrink: 0;
+}
+
+.dw-terms a {
+
+    color: #a78bfa;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.dw-terms a:hover {
+
+    color: #c4b5fd;
+}
+
+/* BUTTON */
+
+.dw-register-submit {
+
+    width: 100%;
+
+    height: 51px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            100deg,
+            #6366f1,
+            #8b5cf6,
+            #7c3aed
+        );
+
+    font-weight: 700;
+
+    font-size: .82rem;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px rgba(99,102,241,.2);
+
+    transition: .2s;
+}
+
+.dw-register-submit:hover {
+
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 16px 35px rgba(99,102,241,.3);
+}
+
+.dw-register-submit i {
+
+    margin-left: 7px;
+}
+
+/* BOTTOM */
+
+.dw-login-link {
+
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #64748b;
+
+    font-size: .74rem;
+}
+
+.dw-login-link a {
+
+    color: #a78bfa;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.dw-login-link a:hover {
+
+    color: #c4b5fd;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .dw-register-card {
+
+        grid-template-columns: 1fr;
+
+        max-width: 560px;
+    }
+
+    .dw-register-info {
+
+        padding: 35px;
+
+        min-height: 300px;
+
+        border-right: 0;
+
+        border-bottom: 1px solid var(--dw-border);
+    }
+
+    .dw-register-message {
+
+        padding: 35px 0 25px;
+    }
+
+    .dw-register-message h1 {
+
+        font-size: 2.35rem;
+    }
+
+    .dw-register-form {
+
+        padding: 40px 35px;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .dw-register-container {
+
+        padding: 0;
+    }
+
+    .dw-register-card {
+
+        border-radius: 0;
+
+        border: 0;
+    }
+
+    .dw-register-info {
+
+        padding: 28px 22px;
+
+        min-height: 270px;
+    }
+
+    .dw-register-message {
+
+        padding: 30px 0 20px;
+    }
+
+    .dw-register-message h1 {
+
+        font-size: 2.15rem;
+    }
+
+    .dw-register-form {
+
+        padding: 35px 22px;
+    }
+}
+</style>
+
+<div class="dw-register-page">
+
+<div class="dw-register-container">
+
+    <div class="dw-register-card">
+
+
+        <!-- =================================================
+             LEFT INFORMATION
+             ================================================= -->
+
+        <section class="dw-register-info">
+
+            <a href="#" class="dw-register-brand">
+
+                <div class="dw-register-brand-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+
+                Dev<span>Workspace</span>
+
+            </a>
+
+
+            <div class="dw-register-message">
+
+                <div class="small-title">
+                    Build your workspace
+                </div>
+
+                <h1>
+                    Turn ideas into
+                    <span class="dw-register-gradient">
+                        real projects.
+                    </span>
+                </h1>
+
+                <p>
+                    Create your workspace, organize your projects,
+                    practice coding and keep track of your learning
+                    journey from one place.
+                </p>
+
+            </div>
+
+
+            <div class="dw-benefits">
+
+                <div class="dw-benefit">
+
+                    <div class="dw-benefit-icon">
+                        <i class="fa-solid fa-folder-tree"></i>
+                    </div>
+
+                    Organize projects and files
+
+                </div>
+
+                <div class="dw-benefit">
+
+                    <div class="dw-benefit-icon">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+
+                    Learn and practice coding
+
+                </div>
+
+                <div class="dw-benefit">
+
+                    <div class="dw-benefit-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    Track your learning progress
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REGISTER FORM
+             ================================================= -->
+
+        <section class="dw-register-form">
+
+
+            <div class="dw-register-heading">
+
+                <h2>Create your account</h2>
+
+                <p>
+                    Set up your DevWorkspace in a few simple steps.
+                </p>
+
+            </div>
+
+
+            <!-- FLASH -->
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="alert alert-{{ category }} alert-dismissible fade show mb-4"
+                             role="alert">
+
+                            {{ message }}
+
+                            <button type="button"
+                                    class="btn-close btn-close-white"
+                                    data-bs-dismiss="alert">
+                            </button>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <form method="POST"
+                  action="{{ url_for('auth.register') }}"
+                  novalidate>
+
+                {{ form.hidden_tag() }}
+
+
+                <!-- NAME / USERNAME -->
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <div class="dw-reg-field">
+
+                            <label class="dw-reg-label">
+                                Full name
+                            </label>
+
+                            <div class="dw-reg-input-wrap">
+
+                                <i class="fa-regular fa-user dw-reg-icon"></i>
+
+                                {{ form.full_name(
+                                    class="dw-reg-input" +
+                                    (" is-invalid" if form.full_name.errors else ""),
+                                    placeholder="Your full name"
+                                ) }}
+
+                            </div>
+
+                            {% for error in form.full_name.errors %}
+
+                                <div class="invalid-feedback d-block mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="dw-reg-field">
+
+                            <label class="dw-reg-label">
+                                Username
+                            </label>
+
+                            <div class="dw-reg-input-wrap">
+
+                                <i class="fa-solid fa-at dw-reg-icon"></i>
+
+                                {{ form.username(
+                                    class="dw-reg-input" +
+                                    (" is-invalid" if form.username.errors else ""),
+                                    placeholder="Choose username"
+                                ) }}
+
+                            </div>
+
+                            {% for error in form.username.errors %}
+
+                                <div class="invalid-feedback d-block mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="dw-reg-field">
+
+                    <label class="dw-reg-label">
+                        Email address
+                    </label>
+
+                    <div class="dw-reg-input-wrap">
+
+                        <i class="fa-regular fa-envelope dw-reg-icon"></i>
+
+                        {{ form.email(
+                            class="dw-reg-input" +
+                            (" is-invalid" if form.email.errors else ""),
+                            placeholder="you@example.com"
+                        ) }}
+
+                    </div>
+
+                    {% for error in form.email.errors %}
+
+                        <div class="invalid-feedback d-block mt-1">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="dw-reg-field">
+
+                    <label class="dw-reg-label">
+                        Password
+                    </label>
+
+                    <div class="dw-reg-input-wrap">
+
+                        <i class="fa-solid fa-lock dw-reg-icon"></i>
+
+                        {{ form.password(
+                            class="dw-reg-input" +
+                            (" is-invalid" if form.password.errors else ""),
+                            id="regPassword",
+                            placeholder="Create a strong password"
+                        ) }}
+
+                        <button
+                            type="button"
+                            class="dw-reg-toggle"
+                            onclick="toggleRegPassword('regPassword', this)"
+                            aria-label="Toggle password">
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="dw-strength">
+
+                        <div class="dw-strength-track">
+
+                            <div id="strengthBar"
+                                 class="dw-strength-bar">
+                            </div>
+
+                        </div>
+
+                        <div id="strengthText"
+                             class="dw-strength-text">
+                            Enter a password
+                        </div>
+
+                    </div>
+
+
+                    {% for error in form.password.errors %}
+
+                        <div class="invalid-feedback d-block mt-1">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- CONFIRM -->
+
+                <div class="dw-reg-field">
+
+                    <label class="dw-reg-label">
+                        Confirm password
+                    </label>
+
+                    <div class="dw-reg-input-wrap">
+
+                        <i class="fa-solid fa-shield-halved dw-reg-icon"></i>
+
+                        {{ form.confirm_password(
+                            class="dw-reg-input" +
+                            (" is-invalid" if form.confirm_password.errors else ""),
+                            id="confirmPassword",
+                            placeholder="Repeat your password"
+                        ) }}
+
+                        <button
+                            type="button"
+                            class="dw-reg-toggle"
+                            onclick="toggleRegPassword('confirmPassword', this)"
+                            aria-label="Toggle password">
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                    {% for error in form.confirm_password.errors %}
+
+                        <div class="invalid-feedback d-block mt-1">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <label class="dw-terms">
+
+                    {{ form.accept_terms(
+                        class="form-check-input" +
+                        (" is-invalid" if form.accept_terms.errors else ""),
+                        id="accept_terms"
+                    ) }}
+
+                    <span>
+
+                        I agree to the
+
+                        <a href="{{ url_for('public.terms') }}"
+                           target="_blank">
+                            Terms of Service
+                        </a>
+
+                        and
+
+                        <a href="{{ url_for('public.privacy') }}"
+                           target="_blank">
+                            Privacy Policy
+                        </a>.
+
+                    </span>
+
+                </label>
+
+
+                {% for error in form.accept_terms.errors %}
+
+                    <div class="invalid-feedback d-block mb-3">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+
+                <!-- SUBMIT -->
+
+                {{ form.submit(
+                    class="dw-register-submit",
+                    value="Create Account"
+                ) }}
+
+
+            </form>
+
+
+            <div class="dw-login-link">
+
+                Already have an account?
+
+                <a href="{{ url_for('auth.login') }}">
+                    Sign in
+                    <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* =========================================================
+   PASSWORD VISIBILITY
+   ========================================================= */
+
+function toggleRegPassword(inputId, button) {
+
+    const input = document.getElementById(inputId);
+
+    const icon = button.querySelector("i");
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        input.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+
+/* =========================================================
+   PASSWORD STRENGTH
+   ========================================================= */
+
+const regPassword =
+    document.getElementById("regPassword");
+
+const strengthBar =
+    document.getElementById("strengthBar");
+
+const strengthText =
+    document.getElementById("strengthText");
+
+
+if (regPassword) {
+
+    regPassword.addEventListener("input", function () {
+
+        const value = this.value;
+
+        if (!value) {
+
+            strengthBar.style.width = "0%";
+
+            strengthText.textContent =
+                "Enter a password";
+
+            strengthBar.style.background =
+                "transparent";
+
+            strengthText.style.color =
+                "#64748b";
+
+            return;
+        }
+
+
+        let score = 0;
+
+
+        if (value.length >= 8)
+            score += 25;
+
+        if (/[A-Z]/.test(value))
+            score += 25;
+
+        if (/[0-9]/.test(value))
+            score += 25;
+
+        if (/[^A-Za-z0-9]/.test(value))
+            score += 25;
+
+
+        strengthBar.style.width =
+            score + "%";
+
+
+        if (score <= 25) {
+
+            strengthBar.style.background =
+                "#ef4444";
+
+            strengthText.textContent =
+                "Weak password";
+
+            strengthText.style.color =
+                "#f87171";
+
+        }
+
+        else if (score <= 50) {
+
+            strengthBar.style.background =
+                "#f59e0b";
+
+            strengthText.textContent =
+                "Fair password";
+
+            strengthText.style.color =
+                "#fbbf24";
+
+        }
+
+        else if (score <= 75) {
+
+            strengthBar.style.background =
+                "#06b6d4";
+
+            strengthText.textContent =
+                "Good password";
+
+            strengthText.style.color =
+                "#22d3ee";
+
+        }
+
+        else {
+
+            strengthBar.style.background =
+                "#22c55e";
+
+            strengthText.textContent =
+                "Strong password";
+
+            strengthText.style.color =
+                "#4ade80";
+
+        }
+
+    });
+
+}
+
+</script>
+
+{% endblock %}

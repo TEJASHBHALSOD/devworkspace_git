@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}DevWorkspace | Learn. Code. Build.{% endblock %}</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container"><a class="navbar-brand fw-bold" href="{{ url_for('public.home') }}">
+    <i class="fa-solid fa-code text-primary me-2"></i>DevWorkspace</a><button
+                class="navbar-toggler text-white border-0" data-bs-toggle="collapse" data-bs-target="#nav"><i
+                    class="fa-solid fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav mx-auto">
+                    <li><a class="nav-link active" href="{{ url_for('public.home') }}">Home</a></li>
+                    <li><a class="nav-link" href="{{ url_for('public.about') }}">About</a></li>
+                    <li><a class="nav-link" href="{{ url_for('public.features') }}">Features</a></li>
+                    <li><a class="nav-link" href="{{ url_for('public.content') }}">Learning</a></li>
+                    <li><a class="nav-link" href="{{ url_for('public.faq') }}">FAQ</a></li>
+                    <li><a class="nav-link" href="{{ url_for('public.contact') }}">Contact</a></li>
+                </ul>
+                <div class="nav-actions"><a class="btn btn-outline-light-custom"
+                        href="{{ url_for('auth.login') }}">Login</a><a class="btn btn-primary-custom"
+                        href="{{ url_for('auth.register') }}">Register</a></div>
+            </div>
+        </div>
+    </nav>
+    {% block mainContent %}
+    {% endblock %}
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4"><a class="footer-brand" href="index.html"><span class="brand-mark"><i
+                                class="fa-solid fa-code"></i></span>DevWorkspace</a>
+                    <p>One focused environment for learning programming, building projects, organizing code and tracking
+                        your developer journey.</p>
+                    <div class="social"><a href="#"><i class="fa-brands fa-github"></i></a><a href="#"><i
+                                class="fa-brands fa-linkedin"></i></a><a href="#"><i
+                                class="fa-brands fa-youtube"></i></a><a href="#"><i
+                                class="fa-brands fa-instagram"></i></a></div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Product</h5><a href="pages/public/features.html">Features</a><a
+                        href="pages/public/learning.html">Learning</a><a href="pages/public/faq.html">FAQ</a><a
+                        href="index.html">Home</a>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Company</h5><a href="pages/public/about.html">About</a><a
+                        href="pages/public/contact.html">Contact</a><a href="#">Careers</a><a href="#">Community</a>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Legal</h5><a href="pages/public/privacy.html">Privacy Policy</a><a
+                        href="pages/public/terms.html">Terms & Conditions</a><a href="#">Security</a>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Stay Updated</h5>
+                    <p>New lessons and product updates.</p>
+                    <div class="newsletter"><input placeholder="Email"><button><i
+                                class="fa-solid fa-arrow-right"></i></button></div>
+                </div>
+            </div>
+            <div class="footer-bottom"><span>© 2026 DevWorkspace. All rights reserved.</span><span>Built for learning.
+                    Designed for builders.</span></div>
+        </div>
+    </footer><button id="backTop"><i class="fa-solid fa-arrow-up"></i></button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

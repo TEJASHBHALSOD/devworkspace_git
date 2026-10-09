@@ -1,0 +1,132 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+    <main style="padding-top: calc(var(--navbar-height) + 2rem);">
+    <!-- Header -->
+    <section class="py-5 text-center bg-surface-secondary border-bottom">
+      <div class="container">
+        <span class="section-tag">Get in Touch</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">We’re Here to Help You Build</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 720px;">
+          Have questions about our curriculum, bug reports, feature recommendations, or student project inquiries? Drop us a message below.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Split Section -->
+    <section class="public-section">
+      <div class="container">
+        <div class="row g-5">
+          <!-- Left Info Column -->
+          <div class="col-lg-5">
+            <div class="pe-lg-4">
+              <h2 class="h3 fw-bold text-dark mb-4">Contact Information</h2>
+              <p class="text-secondary mb-4">
+                DevWorkspace is an academic M.Sc. IT initiative developed for computer science students and educators. We're actively gathering feedback for future releases.
+              </p>
+
+              <div class="d-flex flex-column gap-4 mb-5">
+                <div class="d-flex align-items-start gap-3">
+                  <div class="feature-icon-wrapper feature-icon-blue flex-shrink-0" style="width: 44px; height: 44px;">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold text-dark mb-1">Email Inquiries</h6>
+                    <a href="mailto:support@devworkspace.io" class="text-muted">support@devworkspace.io</a>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start gap-3">
+                  <div class="feature-icon-wrapper feature-icon-green flex-shrink-0" style="width: 44px; height: 44px;">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold text-dark mb-1">Campus Location</h6>
+                    <p class="text-muted mb-0">Department of Computer Science &amp; IT, Dev Campus</p>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start gap-3">
+                  <div class="feature-icon-wrapper feature-icon-purple flex-shrink-0" style="width: 44px; height: 44px;">
+                    <i class="fa-solid fa-headset"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold text-dark mb-1">Student Help Hours</h6>
+                    <p class="text-muted mb-0">Monday – Friday: 9:00 AM – 6:00 PM IST</p>
+                  </div>
+                </div>
+              </div>
+
+              <h6 class="fw-bold text-dark mb-3">Join Developer Community</h6>
+              <div class="footer-social-icons">
+                <a href="#" class="footer-social-btn bg-primary text-white" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="footer-social-btn bg-primary text-white" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" class="footer-social-btn bg-primary text-white" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Contact Form Column -->
+          <div class="col-lg-7">
+            <div class="app-card p-4 p-md-5">
+              <h3 class="h4 fw-bold text-dark mb-2">Send us a Message</h3>
+              <p class="text-muted fs-sm mb-4">Fill in the details below and we will respond promptly.</p>
+
+              <form id="contactForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label-app" for="contactFullName">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-app" id="contactFullName" placeholder="e.g. Tejash Sharma" required>
+                    <div class="invalid-feedback">Please enter your full name.</div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label-app" for="contactEmail">Email Address <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control-app" id="contactEmail" placeholder="name@domain.com" required>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label-app" for="contactCategory">Category <span class="text-danger">*</span></label>
+                    <select class="form-select-app" id="contactCategory" required>
+                      <option value="" selected disabled>Select an inquiry type</option>
+                      <option value="general">General Question</option>
+                      <option value="learning">Curriculum &amp; Courses</option>
+                      <option value="workspace">Code Workspace Feedback</option>
+                      <option value="bug">Report a Bug</option>
+                      <option value="academic">Academic Collaboration</option>
+                    </select>
+                    <div class="invalid-feedback">Please choose a category.</div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label-app" for="contactSubject">Subject <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-app" id="contactSubject" placeholder="Brief subject..." required>
+                    <div class="invalid-feedback">Please enter a subject.</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label-app" for="contactMessage">Message <span class="text-danger">*</span></label>
+                    <textarea class="form-control-app" id="contactMessage" rows="5" placeholder="Describe your question or feedback in detail..." required></textarea>
+                    <div class="invalid-feedback">Please enter your message.</div>
+                  </div>
+
+                  <div class="col-12 pt-2 d-flex gap-3">
+                    <button type="submit" class="btn-app-primary" id="btnSubmitContact">
+                      <i class="fa-solid fa-paper-plane"></i>
+                      <span>Send Message</span>
+                    </button>
+                    <button type="reset" class="btn-app-secondary">
+                      <i class="fa-solid fa-rotate-left"></i>
+                      <span>Reset</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock  %}

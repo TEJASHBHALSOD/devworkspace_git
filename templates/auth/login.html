@@ -1,0 +1,1081 @@
+{% extends "base_auth.html" %}
+
+{% block content %}
+
+<style>
+/* =========================================================
+   DEVWORKSPACE AUTH — LOGIN
+   ========================================================= */
+
+:root {
+    --dw-bg: #080b12;
+    --dw-panel: #0d111a;
+    --dw-card: #101620;
+    --dw-border: rgba(255,255,255,.09);
+
+    --dw-purple: #8b5cf6;
+    --dw-indigo: #6366f1;
+    --dw-cyan: #22d3ee;
+
+    --dw-text: #f8fafc;
+    --dw-muted: #94a3b8;
+    --dw-dim: #64748b;
+
+    --dw-input: #0b1018;
+}
+
+/* ---------- PAGE ---------- */
+
+.dw-auth-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 15%, rgba(99,102,241,.16), transparent 32%),
+        radial-gradient(circle at 90% 85%, rgba(34,211,238,.09), transparent 30%),
+        var(--dw-bg);
+
+    color: var(--dw-text);
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle grid */
+
+.dw-auth-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+    background-size: 55px 55px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+
+    pointer-events: none;
+}
+
+/* ---------- LAYOUT ---------- */
+
+.dw-auth-container {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dw-auth-layout {
+    width: min(1180px, 100%);
+    min-height: 690px;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+
+    background: rgba(13,17,26,.82);
+
+    border: 1px solid var(--dw-border);
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.45),
+        0 0 80px rgba(99,102,241,.07);
+
+    backdrop-filter: blur(20px);
+}
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+.dw-auth-showcase {
+    position: relative;
+
+    padding: 55px;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(139,92,246,.16), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(34,211,238,.08), transparent 35%),
+        #0b1018;
+
+    border-right: 1px solid var(--dw-border);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+.dw-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: white;
+    text-decoration: none;
+}
+
+.dw-brand-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        135deg,
+        var(--dw-purple),
+        var(--dw-indigo)
+    );
+
+    box-shadow:
+        0 10px 30px rgba(99,102,241,.3);
+}
+
+.dw-brand-icon i {
+    font-size: 19px;
+}
+
+.dw-brand-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+}
+
+.dw-brand-name span {
+    color: #a78bfa;
+}
+
+.dw-showcase-content {
+    margin-top: auto;
+    margin-bottom: 30px;
+}
+
+.dw-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #a5b4fc;
+
+    font-size: .72rem;
+    font-weight: 700;
+
+    letter-spacing: .13em;
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+}
+
+.dw-eyebrow-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--dw-cyan);
+
+    box-shadow: 0 0 14px var(--dw-cyan);
+}
+
+.dw-showcase-content h1 {
+    font-size: clamp(2.3rem, 4vw, 4rem);
+    line-height: 1.04;
+
+    font-weight: 750;
+    letter-spacing: -.055em;
+
+    margin-bottom: 20px;
+}
+
+.dw-gradient-text {
+    background: linear-gradient(
+        100deg,
+        #a78bfa,
+        #818cf8 45%,
+        #67e8f9
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.dw-showcase-content p {
+    max-width: 490px;
+
+    color: var(--dw-muted);
+
+    line-height: 1.75;
+    font-size: .96rem;
+
+    margin-bottom: 0;
+}
+
+/* ---------- EDITOR ---------- */
+
+.dw-editor {
+    width: 100%;
+    max-width: 500px;
+
+    margin-top: 42px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    background: #080c12;
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.3);
+}
+
+.dw-editor-top {
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 13px;
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
+
+    background: #0d121b;
+}
+
+.dw-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dw-dots span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #475569;
+}
+
+.dw-editor-title {
+    flex: 1;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: .67rem;
+    font-family: monospace;
+}
+
+.dw-editor-body {
+    padding: 18px 20px;
+
+    font-family: "Courier New", monospace;
+    font-size: .72rem;
+
+    line-height: 1.9;
+
+    color: #94a3b8;
+}
+
+.code-number {
+    display: inline-block;
+
+    width: 27px;
+
+    color: #334155;
+}
+
+.code-keyword {
+    color: #c084fc;
+}
+
+.code-function {
+    color: #67e8f9;
+}
+
+.code-string {
+    color: #86efac;
+}
+
+.code-comment {
+    color: #475569;
+}
+
+.dw-editor-status {
+    margin-top: 12px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid rgba(255,255,255,.06);
+
+    color: #64748b;
+
+    font-size: .67rem;
+}
+
+.dw-status-success {
+    color: #4ade80;
+}
+
+/* ---------- FOOTER ---------- */
+
+.dw-showcase-footer {
+    display: flex;
+    gap: 22px;
+
+    color: #64748b;
+
+    font-size: .72rem;
+}
+
+.dw-showcase-footer span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dw-showcase-footer i {
+    color: #818cf8;
+}
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.dw-auth-form-panel {
+    padding: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0e141d;
+}
+
+.dw-auth-form-inner {
+    width: 100%;
+    max-width: 390px;
+}
+
+/* ---------- FORM HEADER ---------- */
+
+.dw-form-header {
+    margin-bottom: 36px;
+}
+
+.dw-form-header h2 {
+    margin: 0 0 9px;
+
+    font-size: 1.85rem;
+    font-weight: 700;
+
+    letter-spacing: -.035em;
+
+    color: white;
+}
+
+.dw-form-header p {
+    margin: 0;
+
+    color: var(--dw-muted);
+
+    font-size: .88rem;
+}
+
+/* ---------- ALERT ---------- */
+
+.dw-alert {
+    border-radius: 11px;
+
+    background: rgba(99,102,241,.09) !important;
+
+    border: 1px solid rgba(129,140,248,.18) !important;
+
+    color: #cbd5e1 !important;
+
+    font-size: .82rem;
+}
+
+/* ---------- INPUT ---------- */
+
+.dw-field {
+    margin-bottom: 21px;
+}
+
+.dw-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #cbd5e1;
+
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+.dw-input-wrap {
+    position: relative;
+}
+
+.dw-input-icon {
+    position: absolute;
+
+    left: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #475569;
+
+    pointer-events: none;
+
+    transition: color .2s;
+}
+
+.dw-input {
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 45px;
+
+    border-radius: 11px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: var(--dw-input) !important;
+
+    color: white !important;
+
+    outline: none;
+
+    font-size: .86rem;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
+}
+
+.dw-input::placeholder {
+    color: #475569;
+}
+
+.dw-input:focus {
+    border-color: rgba(139,92,246,.75);
+
+    background: #0d131d !important;
+
+    box-shadow:
+        0 0 0 3px rgba(139,92,246,.11);
+}
+
+.dw-input-wrap:focus-within .dw-input-icon {
+    color: #a78bfa;
+}
+
+/* autofill */
+
+.dw-input:-webkit-autofill,
+.dw-input:-webkit-autofill:hover,
+.dw-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0 1000px #0b1018 inset !important;
+}
+
+/* ---------- PASSWORD BUTTON ---------- */
+
+.dw-password-toggle {
+    position: absolute;
+
+    right: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: 0;
+    background: transparent;
+
+    color: #475569;
+
+    padding: 5px;
+
+    cursor: pointer;
+
+    transition: color .2s;
+}
+
+.dw-password-toggle:hover {
+    color: #cbd5e1;
+}
+
+/* ---------- REMEMBER ---------- */
+
+.dw-form-options {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 4px 0 25px;
+}
+
+.dw-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #64748b;
+
+    font-size: .78rem;
+
+    cursor: pointer;
+}
+
+.dw-check input {
+    width: 15px;
+    height: 15px;
+
+    accent-color: var(--dw-purple);
+
+    cursor: pointer;
+}
+
+/* ---------- BUTTON ---------- */
+
+.dw-submit {
+    width: 100%;
+
+    height: 53px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #6366f1,
+            #8b5cf6 55%,
+            #7c3aed
+        );
+
+    color: white;
+
+    font-size: .87rem;
+    font-weight: 700;
+
+    letter-spacing: .01em;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px rgba(99,102,241,.2);
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        filter .2s;
+}
+
+.dw-submit:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 17px 35px rgba(99,102,241,.3);
+}
+
+.dw-submit:active {
+    transform: translateY(0);
+}
+
+.dw-submit i {
+    margin-left: 7px;
+}
+
+/* ---------- DIVIDER ---------- */
+
+.dw-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin: 27px 0;
+
+    color: #475569;
+
+    font-size: .7rem;
+}
+
+.dw-divider::before,
+.dw-divider::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(255,255,255,.07);
+}
+
+/* ---------- BOTTOM ---------- */
+
+.dw-auth-switch {
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: .8rem;
+}
+
+.dw-auth-switch a {
+    color: #a78bfa;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: color .2s;
+}
+
+.dw-auth-switch a:hover {
+    color: #c4b5fd;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 900px) {
+
+    .dw-auth-container {
+        padding: 20px;
+    }
+
+    .dw-auth-layout {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+
+        max-width: 520px;
+    }
+
+    .dw-auth-showcase {
+        min-height: 400px;
+
+        padding: 35px;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--dw-border);
+    }
+
+    .dw-editor {
+        margin-top: 30px;
+    }
+
+    .dw-showcase-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .dw-showcase-footer {
+        margin-top: 30px;
+    }
+
+    .dw-auth-form-panel {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .dw-auth-container {
+        padding: 0;
+    }
+
+    .dw-auth-layout {
+        border-radius: 0;
+        border: 0;
+    }
+
+    .dw-auth-showcase {
+        min-height: 350px;
+
+        padding: 28px 22px;
+    }
+
+    .dw-auth-form-panel {
+        padding: 35px 22px;
+    }
+
+    .dw-editor {
+        display: none;
+    }
+
+    .dw-showcase-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .dw-showcase-content p {
+        font-size: .84rem;
+    }
+}
+</style>
+
+<div class="dw-auth-page">
+<div class="dw-auth-container">
+
+    <div class="dw-auth-layout">
+
+        <!-- =================================================
+             LEFT BRAND / PRODUCT AREA
+             ================================================= -->
+
+        <section class="dw-auth-showcase">
+
+            <div>
+
+                <a href="#" class="dw-brand">
+
+                    <div class="dw-brand-icon">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+
+                    <div class="dw-brand-name">
+                        Dev<span>Workspace</span>
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <div class="dw-showcase-content">
+
+                <div class="dw-eyebrow">
+                    <span class="dw-eyebrow-dot"></span>
+                    Your developer workspace
+                </div>
+
+                <h1>
+                    Learn.
+                    <span class="dw-gradient-text">Code.</span><br>
+                    Build. Grow.
+                </h1>
+
+                <p>
+                    Keep your learning, projects, code and progress
+                    together in one focused workspace built for
+                    developers.
+                </p>
+
+
+                <!-- CODE EDITOR -->
+
+                <div class="dw-editor">
+
+                    <div class="dw-editor-top">
+
+                        <div class="dw-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="dw-editor-title">
+                            DevWorkspace / project.js
+                        </div>
+
+                    </div>
+
+                    <div class="dw-editor-body">
+
+                        <div>
+                            <span class="code-number">01</span>
+                            <span class="code-keyword">const</span>
+                            workspace =
+                            <span class="code-string">"DevWorkspace"</span>;
+                        </div>
+
+                        <div>
+                            <span class="code-number">02</span>
+                            <span class="code-keyword">function</span>
+                            <span class="code-function">buildFuture</span>() {
+                        </div>
+
+                        <div>
+                            <span class="code-number">03</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="code-keyword">return</span>
+                            <span class="code-string">"Learn + Build"</span>;
+                        </div>
+
+                        <div>
+                            <span class="code-number">04</span>
+                            }
+                        </div>
+
+                        <div class="dw-editor-status">
+                            <span class="dw-status-success">✓</span>
+                            Workspace ready
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dw-showcase-footer">
+
+                <span>
+                    <i class="fa-solid fa-folder-tree"></i>
+                    Projects
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-code"></i>
+                    Editor
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-chart-line"></i>
+                    Progress
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LOGIN FORM
+             ================================================= -->
+
+        <section class="dw-auth-form-panel">
+
+            <div class="dw-auth-form-inner">
+
+
+                <div class="dw-form-header">
+
+                    <h2>Welcome back</h2>
+
+                    <p>
+                        Sign in to continue to your workspace.
+                    </p>
+
+                </div>
+
+
+                <!-- FLASH MESSAGES -->
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+                    {% if messages %}
+
+                        {% for category, message in messages %}
+
+                            <div class="alert dw-alert alert-dismissible fade show mb-4"
+                                 role="alert">
+
+                                {{ message }}
+
+                                <button type="button"
+                                        class="btn-close btn-close-white"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                </button>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endwith %}
+
+
+                <form method="POST"
+                      action="{{ url_for('auth.login') }}"
+                      novalidate>
+
+                    {{ form.hidden_tag() }}
+
+
+                    <!-- EMAIL -->
+
+                    <div class="dw-field">
+
+                        <label class="dw-label">
+                            Email address
+                        </label>
+
+                        <div class="dw-input-wrap">
+
+                            <i class="fa-regular fa-envelope dw-input-icon"></i>
+
+                            {{ form.email(
+                                class="dw-input" +
+                                (" is-invalid" if form.email.errors else ""),
+                                placeholder="you@example.com"
+                            ) }}
+
+                        </div>
+
+                        {% for error in form.email.errors %}
+
+                            <div class="invalid-feedback d-block mt-2">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="dw-field">
+
+                        <label class="dw-label">
+                            Password
+                        </label>
+
+                        <div class="dw-input-wrap">
+
+                            <i class="fa-solid fa-lock dw-input-icon"></i>
+
+                            {{ form.password(
+                                class="dw-input" +
+                                (" is-invalid" if form.password.errors else ""),
+                                id="loginPassword",
+                                placeholder="Enter your password"
+                            ) }}
+
+                            <button
+                                type="button"
+                                class="dw-password-toggle"
+                                onclick="togglePasswordVisibility('loginPassword', this)"
+                                aria-label="Toggle password">
+
+                                <i class="fa-regular fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                        {% for error in form.password.errors %}
+
+                            <div class="invalid-feedback d-block mt-2">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="dw-form-options">
+
+                        <label class="dw-check">
+
+                            {{ form.remember_me(
+                                class="form-check-input",
+                                id="remember_me"
+                            ) }}
+
+                            <span>Remember me</span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    {{ form.submit(
+                        class="dw-submit",
+                        value="Sign In"
+                    ) }}
+
+
+                </form>
+
+
+                <div class="dw-divider">
+                    <span>NEW TO DEVWORKSPACE?</span>
+                </div>
+
+
+                <div class="dw-auth-switch">
+
+                    Don't have an account?
+
+                    <a href="{{ url_for('auth.register') }}">
+                        Create your workspace
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+function togglePasswordVisibility(inputId, btn) {
+
+    const input = document.getElementById(inputId);
+
+    const icon = btn.querySelector("i");
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        input.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

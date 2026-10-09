@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% set active_admin_page='users' %}
+{% block admin_breadcrumb %}Registered Users{% endblock %}
+{% block admin_content %}
+<div class="ad-heading">
+  <div><h1>Registered Users</h1><p>Only normal registered users are shown here. Administrator accounts are kept separate from this list.</p></div>
+  <a class="ad-btn" href="{{ url_for('admin.create_user') }}"><i class="fa-solid fa-user-plus"></i> Add User</a>
+</div>
+<div class="ad-card">
+  <div class="ad-body"><form method="GET" class="row g-2"><div class="col-md-9"><input class="ad-input" name="search" value="{{ search }}" placeholder="Search username or email..."></div><div class="col-md-3"><button class="ad-btn w-100"><i class="fa-solid fa-search"></i> Search</button></div></form></div>
+  <div class="ad-table-wrap"><table class="ad-table"><thead><tr><th>ID</th><th>User</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody>
+  {% for u in users %}
+  <tr><td>#{{ u.id }}</td><td><a style="color:#e2e8f0;text-decoration:none" href="{{ url_for('admin.user_detail', user_id=u.id) }}"><strong>{{ u.username }}</strong></a></td><td>{{ u.email }}</td><td><span class="ad-badge green">User</span></td><td><div class="d-flex flex-wrap gap-1"><a class="ad-chip" href="{{ url_for('admin.user_detail', user_id=u.id) }}">View</a><a class="ad-chip" href="{{ url_for('admin.edit_user', user_id=u.id) }}">Edit</a><form class="d-inline" method="POST" action="{{ url_for('admin.delete_user', user_id=u.id) }}" onsubmit="return confirm('Delete this registered user?')"><button class="ad-chip" style="color:#fca5a5">Delete</button></form></div></td></tr>
+  {% else %}<tr><td colspan="5"><div class="ad-empty"><i class="fa-solid fa-users"></i><h3>No registered users found</h3><p>Users who register from the normal user portal will appear here.</p></div></td></tr>{% endfor %}
+  </tbody></table></div>
+</div>
+{% endblock %}

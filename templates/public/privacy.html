@@ -1,0 +1,39 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+    <main style="padding-top: calc(var(--navbar-height) + 2rem);">
+    <section class="py-5 text-center bg-surface-secondary border-bottom">
+      <div class="container">
+        <span class="section-tag">Legal Documentation</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">Privacy Policy</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 720px;">
+          Effective Date: August 17, 2026 • Version 1.0
+        </p>
+      </div>
+    </section>
+
+    <section class="public-section">
+      <div class="container" style="max-width: 860px;">
+        <div class="app-card p-4 p-md-5">
+          <h2 class="h4 fw-bold text-dark mb-3">1. Introduction</h2>
+          <p class="text-secondary">Welcome to DevWorkspace. We value your privacy and are committed to protecting any student and workspace data processed through our platform. This policy outlines our collection, storage, and handling practices.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">2. Information Collection</h2>
+          <p class="text-secondary">We collect information provided directly by users when registering an account, including full names, usernames, and email addresses. We also track learning progress such as completed lessons, exercise submissions, and quiz metrics.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">3. Workspace &amp; File Data</h2>
+          <p class="text-secondary">Code files, documents, and project blueprints created or uploaded in the Code Workspace remain the intellectual property of the student. In this frontend stage, files are managed locally within browser storage.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">4. Local Storage Usage</h2>
+          <p class="text-secondary">DevWorkspace utilizes browser <code>localStorage</code> to store interface preferences, dark/light theme choices, accent color selections, and frontend session tokens. No third-party tracking cookies are deployed.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">5. Data Retention &amp; Deletion</h2>
+          <p class="text-secondary">Users have full control over their saved state. Clearing browser application cache or using the "Reset Dashboard" action in Settings instantly purges demo workspace records.</p>
+
+          <h2 class="h4 fw-bold text-dark mb-3 mt-4">6. Contact &amp; Inquiries</h2>
+          <p class="text-secondary mb-0">For questions regarding this policy or data safety, reach out to our team at <a href="mailto:privacy@devworkspace.io">privacy@devworkspace.io</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock  %}

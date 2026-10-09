@@ -1,0 +1,399 @@
+{% extends "base_public.html" %}
+
+{% block mainContent %}
+<section class="hero">
+        <div class="hero-grid"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- <span class="eyebrow"><span class="dot-live"></span> A modern
+                        workspace for developers</span> -->
+                    <h1>Learn. Code.<br><span class="gradient-text">Build.</span><br>Grow with confidence.</h1>
+                    <p>DevWorkspace combines structured learning, practical coding, project organization and progress
+                        tracking in one focused environment designed for students and aspiring developers.</p>
+                    <div class="hero-actions"><a href="{{ url_for('auth.register') }}" class="btn btn-primary-custom">Start
+                            Free <i class="fa-solid fa-arrow-right ms-1"></i></a><a href="{{ url_for('public.features') }}"
+                            class="btn btn-outline-light-custom">Explore Platform</a></div>
+                    <div class="hero-stats">
+                        <div><strong>50+</strong><span>Learning modules</span></div>
+                        <div><strong>100+</strong><span>Project ideas</span></div>
+                        <div><strong>10K+</strong><span>Future learners</span></div>
+                        <div><strong>24/7</strong><span>Workspace access</span></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-art">
+                        <div class="orb one"></div>
+                        <div class="orb two"></div>
+                        <div class="floating f-js"><i class="fa-brands fa-js me-1"></i> JavaScript</div>
+                        <div class="floating f-python"><i class="fa-brands fa-python me-1"></i> Python</div>
+                        <div class="floating-badge floating-badge-2">
+                            <div class="feature-icon-wrapper feature-icon-blue mb-0" style="width: 18px; height: 18px; font-size: 1rem;">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold fs-sm">Auto-Backup</div>
+                                <!-- <small class="text-success" style="font-size: 0.72rem;">Safe &amp; Synced</small> -->
+                            </div>
+                        </div>
+                        <div class="floating f-project"><i class="fa-solid fa-folder-tree me-1"></i> Project Workspace</div>
+                        
+                        <!-- <div class="monitor-wrap">
+                            <div class="monitor">
+                                <div class="monitor-head">
+                                    <div class="window-dots"><i></i><i></i><i></i></div><span>DevWorkspace /
+                                        project</span><span>● ●</span>
+                                </div>
+                                <div class="editor">
+                                    <div class="side"><i class="fa-solid fa-folder-open"></i><i
+                                            class="fa-solid fa-file-code"></i><i class="fa-solid fa-terminal"></i><i
+                                            class="fa-solid fa-gear"></i></div>
+                                    <div class="code">
+                                        <div><span class="ln">01</span><span class="kw">const</span> <span
+                                                class="var">workspace</span> = <span class="str">"DevWorkspace"</span>;
+                                        </div>
+                                        <div><span class="ln">02</span><span class="kw">function</span> <span
+                                                class="fn">buildFuture</span>() {</div>
+                                        <div class="indent"><span class="ln">03</span><span class="kw">return</span>
+                                            <span class="str">"Learn + Build + Grow"</span>;</div>
+                                        <div><span class="ln">04</span>}</div>
+                                        <div><span class="ln">05</span><span class="fn">buildFuture</span>();</div>
+                                        <div class="terminal"><span class="ok">✓</span> Project compiled
+                                            successfully<br><span class="info">→</span> Ready to build something great.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stand"></div>
+                            <div class="base"></div>
+                            <div class="desk"></div>
+                        </div> -->
+
+                        <div class="desktop-wrapper">
+
+                            <div class="monitor">
+
+                                <div class="monitor-top">
+                                    <div class="window-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+
+                                    <div class="monitor-title">
+                                        DevWorkspace — editor
+                                    </div>
+
+                                    <div class="monitor-actions">
+                                        <i class="fa-solid fa-minus"></i>
+                                        <i class="fa-solid fa-expand"></i>
+                                    </div>
+                                </div>
+
+                                <div class="code-editor">
+
+                                    <div class="editor-sidebar">
+                                        <i class="fa-solid fa-folder-open"></i>
+                                        <i class="fa-solid fa-file-code"></i>
+                                        <i class="fa-solid fa-terminal"></i>
+                                        <i class="fa-solid fa-gear"></i>
+                                    </div>
+
+                                    <div class="code-area">
+
+                                        <div class="code-line">
+                                            <span class="line-number">01</span>
+                                            <span class="keyword">const</span>
+                                            <span class="variable">workspace</span>
+                                            <span>=</span>
+                                            <span class="string">"DevWorkspace"</span><span>;</span>
+                                        </div>
+
+                                        <div class="code-line">
+                                            <span class="line-number">02</span>
+                                            <span class="keyword">function</span>
+                                            <span class="function">buildFuture</span><span>() {</span>
+                                        </div>
+
+                                        <div class="code-line indent">
+                                            <span class="line-number">03</span>
+                                            <span class="keyword" style="margin-left: 28px;">return</span>
+                                            <span class="string">"Learn + Build + Grow"</span><span>;</span>
+                                        </div>
+
+                                        <div class="code-line">
+                                            <span class="line-number">04</span>
+                                            <span>}</span>
+                                        </div>
+
+                                        <div class="code-line">
+                                            <span class="line-number">05</span>
+                                            <span class="function">buildFuture</span><span>();</span>
+                                        </div>
+
+                                        <div class="terminal">
+                                            <div>
+                                                <span class="terminal-green">✓</span>
+                                                Project compiled successfully
+                                            </div>
+                                            <div>
+                                                <span class="terminal-blue">→</span>
+                                                Ready to build something great.
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="monitor-stand"></div>
+                            <div class="monitor-base"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="section-head text-center"><span class="kicker">A COMPLETE WORKFLOW</span>
+                <h2>From first lesson to finished project.</h2>
+                <p>Every part of the experience is designed to reduce friction and help you spend more time learning and
+                    building.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="mini-card">
+                        <div class="icon purple"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3>Learn clearly</h3>
+                        <p>Follow structured topics with beginner-friendly explanations, examples and practice
+                            activities.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mini-card">
+                        <div class="icon cyan"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3>Practice coding</h3>
+                        <p>Move from theory to code with focused exercises and an editor-first development workflow.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mini-card">
+                        <div class="icon green"><i class="fa-solid fa-folder-tree"></i></div>
+                        <h3>Build projects</h3>
+                        <p>Organize source files, assets and project folders in a workspace that grows with you.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mini-card">
+                        <div class="icon orange"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Track progress</h3>
+                        <p>See completed modules, active projects and milestones so your next step is always visible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section alt">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="section-head left"><span class="kicker">WHY IT FEELS DIFFERENT</span>
+                        <h2>One workspace instead of scattered tools.</h2>
+                        <p>Learning often becomes difficult when notes, code, folders and progress live in different
+                            places. DevWorkspace brings these pieces into one consistent interface.</p>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="stat-card p-4"><strong class="d-block fs-2">01</strong><span
+                                    class="text-secondary">Learn a technology</span></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="stat-card p-4"><strong class="d-block fs-2">02</strong><span
+                                    class="text-secondary">Create a project</span></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="stat-card p-4"><strong class="d-block fs-2">03</strong><span
+                                    class="text-secondary">Write and test code</span></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="stat-card p-4"><strong class="d-block fs-2">04</strong><span
+                                    class="text-secondary">Review your progress</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="code-preview">
+                        <div class="bar"><i></i><i></i><i></i></div>
+                        <pre>project/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── app.js
+├── assets/
+│   ├── images/
+│   └── icons/
+└── README.md
+
+✓ files organized
+✓ editor ready
+✓ project workspace active</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="section-head text-center"><span class="kicker">BUILT FOR REAL LEARNING</span>
+                <h2>Useful from day one, expandable later.</h2>
+                <p>The interface can start simple for a student project and evolve into a complete development platform.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+                        <h3>Course management</h3>
+                        <p>Separate learning content by language, technology and course so your study path stays
+                            organized.</p>
+                        <ul>
+                            <li>Language categories</li>
+                            <li>Course modules</li>
+                            <li>Lesson completion</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="icon green"><i class="fa-solid fa-code"></i></div>
+                        <h3>Developer workspace</h3>
+                        <p>Create projects with predictable folders and keep source code and assets together.</p>
+                        <ul>
+                            <li>Project folders</li>
+                            <li>File management</li>
+                            <li>Editor integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="icon purple"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3>Progress dashboard</h3>
+                        <p>Turn activity into a clear overview of what you have completed and what needs attention.</p>
+                        <ul>
+                            <li>Progress metrics</li>
+                            <li>Project status</li>
+                            <li>Learning milestones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section dark">
+        <div class="container">
+            <div class="section-head text-center"><span class="kicker">HOW IT WORKS</span>
+                <h2>Four simple steps. One continuous journey.</h2>
+                <p>Move from learning to building without changing your workflow.</p>
+            </div>
+            <div class="row g-4 steps">
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="icon"><i class="fa-solid fa-compass"></i></div>
+                        <h3>Choose</h3>
+                        <p>Pick a language or technology and start a structured learning path.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                        <h3>Practice</h3>
+                        <p>Use examples and exercises to turn concepts into working code.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="icon"><i class="fa-solid fa-rocket"></i></div>
+                        <h3>Build</h3>
+                        <p>Apply your knowledge to projects that demonstrate practical skills.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                        <h3>Improve</h3>
+                        <p>Review progress, refine projects and keep moving toward your goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="section-head text-center"><span class="kicker">WHAT LEARNERS VALUE</span>
+                <h2>Designed around progress, not complexity.</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <div class="quote-mark">“</div>
+                        <p>A clean workspace makes it easier to focus on learning instead of searching for files and
+                            resources.</p>
+                        <div class="person">
+                            <div class="avatar">A</div>
+                            <div><strong>Alex</strong>
+                                <div class="text-secondary small">Frontend learner</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <div class="quote-mark">“</div>
+                        <p>Project-based learning becomes much more useful when every file and milestone has a clear
+                            place.</p>
+                        <div class="person">
+                            <div class="avatar">R</div>
+                            <div><strong>Riya</strong>
+                                <div class="text-secondary small">BCA student</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <div class="quote-mark">“</div>
+                        <p>The goal is simple: learn something today and have something tangible to show for it
+                            tomorrow.</p>
+                        <div class="person">
+                            <div class="avatar">D</div>
+                            <div><strong>Dev</strong>
+                                <div class="text-secondary small">Aspiring developer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section alt">
+        <div class="container">
+            <div class="cta">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8"><span class="kicker">START YOUR WORKSPACE</span>
+                        <h2>Build your next project with a clearer process.</h2>
+                        <p>Create an account and explore the learning-first developer experience.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end"><a href="pages/auth/register.html"
+                            class="btn btn-primary-custom">Create Free Account <i
+                                class="fa-solid fa-arrow-right ms-1"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

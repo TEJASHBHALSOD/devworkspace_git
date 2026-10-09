@@ -1,0 +1,64 @@
+{% extends "admin/base.html" %}
+{% set active_admin_page='dashboard' %}
+{% block admin_breadcrumb %}Dashboard{% endblock %}
+{% block admin_content %}
+<div class="ad-heading">
+  <div>
+    <h1>Administrator Dashboard</h1>
+    <p>Manage registered users, learning content, code examples, exercises and system settings.</p>
+  </div>
+  <div class="ad-actions">
+    <span class="ad-badge">Role: Administrator</span>
+    <a class="ad-btn ad-outline" href="{{ url_for('admin.content_import') }}"><i class="fa-solid fa-file-import"></i> Import Word</a>
+    <a class="ad-btn" href="{{ url_for('admin.create_language') }}"><i class="fa-solid fa-plus"></i> Language</a>
+  </div>
+</div>
+
+<div class="ad-grid4 mb-4">
+  <div class="ad-stat"><div class="ad-stat-icon"><i class="fa-solid fa-users"></i></div><div class="ad-stat-value">{{ registered_user_count }}</div><div class="ad-stat-label">Registered Users</div><div class="ad-stat-note">Normal user accounts only</div></div>
+  <div class="ad-stat"><div class="ad-stat-icon"><i class="fa-solid fa-code"></i></div><div class="ad-stat-value">{{ total_languages }}</div><div class="ad-stat-label">Languages</div><div class="ad-stat-note">{{ published_languages }} published</div></div>
+  <div class="ad-stat"><div class="ad-stat-icon"><i class="fa-solid fa-book-open"></i></div><div class="ad-stat-value">{{ total_courses }}</div><div class="ad-stat-label">Courses</div><div class="ad-stat-note">{{ published_courses }} published</div></div>
+  <div class="ad-stat"><div class="ad-stat-icon"><i class="fa-solid fa-layer-group"></i></div><div class="ad-stat-value">{{ total_lessons }}</div><div class="ad-stat-label">Lessons</div><div class="ad-stat-note">Chapters: {{ total_chapters }}</div></div>
+</div>
+
+<div class="ad-card mb-4">
+  <div class="ad-head"><span class="ad-title">Administrator Account</span><span class="ad-badge">Administrator</span></div>
+  <div class="ad-body">
+    <div class="ad-grid3">
+      <div><div class="ad-label">Username</div><div>{{ current_admin.username }}</div></div>
+      <div><div class="ad-label">Email</div><div>{{ current_admin.email }}</div></div>
+      <div><div class="ad-label">Access</div><div>Full admin content management</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="ad-grid2">
+  <section class="ad-card">
+    <div class="ad-head"><span class="ad-title">Recent Registered Users</span><a class="ad-chip" href="{{ url_for('admin.users') }}">View all</a></div>
+    <div class="ad-table-wrap"><table class="ad-table"><thead><tr><th>User</th><th>Email</th><th>Role</th></tr></thead><tbody>
+      {% for u in recent_users %}
+      <tr><td><a href="{{ url_for('admin.user_detail', user_id=u.id) }}" style="color:#e2e8f0;text-decoration:none">{{ u.username }}</a></td><td>{{ u.email }}</td><td><span class="ad-badge green">User</span></td></tr>
+      {% else %}<tr><td colspan="3"><div class="ad-empty">No registered users yet.</div></td></tr>{% endfor %}
+    </tbody></table></div>
+  </section>
+
+  <section class="ad-card">
+    <div class="ad-head"><span class="ad-title">Recent Languages</span><a class="ad-chip" href="{{ url_for('admin.languages') }}">Manage</a></div>
+    <div class="ad-body">
+      {% for language in recent_languages %}
+      <div class="d-flex justify-content-between align-items-center py-2 border-bottom" style="border-color:rgba(255,255,255,.05)!important">
+        <div><div style="font-size:.7rem">{{ language.name }}</div><div style="font-size:.58rem;color:#64748b">{{ language.version }} · {{ language.category }} · {{ language.courses|length }} course(s)</div></div>
+        {% if language.status == 'published' %}<span class="ad-badge green">Published</span>{% else %}<span class="ad-badge yellow">Draft</span>{% endif %}
+      </div>
+      {% else %}<div class="ad-empty">No languages.</div>{% endfor %}
+    </div>
+  </section>
+</div>
+
+<div class="ad-grid4 mt-4">
+  <a class="ad-card" style="padding:18px;text-decoration:none;color:inherit" href="{{ url_for('admin.users') }}"><div class="ad-stat-icon"><i class="fa-solid fa-users"></i></div><div class="mt-3" style="font-size:.7rem;font-weight:650">Registered Users</div><div style="font-size:.6rem;color:#64748b">View only non-admin registered accounts.</div></a>
+  <a class="ad-card" style="padding:18px;text-decoration:none;color:inherit" href="{{ url_for('admin.languages') }}"><div class="ad-stat-icon"><i class="fa-solid fa-code"></i></div><div class="mt-3" style="font-size:.7rem;font-weight:650">Languages</div><div style="font-size:.6rem;color:#64748b">Insert, update, publish and delete.</div></a>
+  <a class="ad-card" style="padding:18px;text-decoration:none;color:inherit" href="{{ url_for('admin.courses') }}"><div class="ad-stat-icon"><i class="fa-solid fa-book-open"></i></div><div class="mt-3" style="font-size:.7rem;font-weight:650">Course Editor</div><div style="font-size:.6rem;color:#64748b">Course → chapter → lesson → learning items.</div></a>
+  <a class="ad-card" style="padding:18px;text-decoration:none;color:inherit" href="{{ url_for('admin.content_import') }}"><div class="ad-stat-icon"><i class="fa-solid fa-file-word"></i></div><div class="mt-3" style="font-size:.7rem;font-weight:650">Word Content Import</div><div style="font-size:.6rem;color:#64748b">Read, preview and publish .docx course content.</div></a>
+</div>
+{% endblock %}
